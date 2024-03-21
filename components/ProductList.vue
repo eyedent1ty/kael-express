@@ -1,4 +1,6 @@
 <template>
+  <CategoryList />
+  <VDivider></VDivider>
   <main class="product-list justify-center ga-4 my-8">
     <Product
       v-for="product in productStore.productList"
