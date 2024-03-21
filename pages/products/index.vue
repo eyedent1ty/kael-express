@@ -1,2 +1,3 @@
 <template>
+  <ProductList />
 </template>
