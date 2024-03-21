@@ -2,7 +2,7 @@
   <header class="px-sm-16 py-2">
     <div class="d-flex justify-space-between text-body-2 mb-4">
       <div class="d-flex">
-        <p class="mx-3">Home</p>
+        <RouterLink to="/" class="mx-3">Home</RouterLink>
         <VDivider vertical></VDivider>
         <p class="mx-3 d-flex align-items-center">
           Follow us on
@@ -22,17 +22,18 @@
       </div>
     </div>
 
-    <div class="d-flex ga-16">
-      <div class="logo-brand">
+    <div class="d-flex align-start ga-16">
+      <div class="d-flex align-start">
         <RouterLink to="/">
           <div class="d-flex align-center">
-            <VIcon icon="mdi-store-outline" size="36"></VIcon>
+            <VIcon icon="mdi-store" size="50"></VIcon>
             <h1>Kael Express</h1>
-          </div>
+          </div>  
         </RouterLink>
       </div>
       <div class="d-flex flex-column flex-1">
         <VTextField
+          placeholder="Sign up and get 100% off on your first order"
           density="compact"
           hide-details="auto"
         >
@@ -107,7 +108,8 @@ a {
   color: white;
 }
 
-a:active, a:visited {
+a:active,
+a:visited {
   color: white;
 }
 </style>
