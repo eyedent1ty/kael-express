@@ -28,19 +28,24 @@
           <div class="d-flex align-center">
             <VIcon icon="mdi-store" size="50"></VIcon>
             <h1>Kael Express</h1>
-          </div>  
+          </div>
         </RouterLink>
       </div>
       <div class="d-flex flex-column flex-1">
-        <VTextField
-          placeholder="Sign up and get 100% off on your first order"
-          density="compact"
-          hide-details="auto"
-        >
-          <template #append>
-            <VBtn variant="outlined" prepend-icon="mdi-magnify">Search</VBtn>
-          </template>
-        </VTextField>
+        <VForm @submit="onFormSubmit">
+          <VTextField
+            v-model="search"
+            placeholder="Sign up and get 100% off on your first order"
+            density="compact"
+            hide-details="auto"
+          >
+            <template #append>
+              <VBtn variant="outlined" prepend-icon="mdi-magnify" type="submit"
+                >Search</VBtn
+              >
+            </template>
+          </VTextField>
+        </VForm>
         <VList class="d-flex suggestions">
           <VListItem class="py-0 suggestion text-white"
             >Camping Chair Buy 1 Take 1</VListItem
@@ -77,6 +82,16 @@
     </div>
   </header>
 </template>
+
+<script setup lang="ts">
+const search = useSearch();
+const router = useRouter();
+
+const onFormSubmit = (e: SubmitEvent) => {
+  e.preventDefault();
+  router.push(`/products?keyword=${search.value}`);
+};
+</script>
 
 <style scoped>
 header {
