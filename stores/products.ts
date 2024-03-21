@@ -1,25 +1,5 @@
 import { defineStore } from 'pinia';
-
-interface Product {
-  brand: string;
-  category: string;
-  description: string;
-  discountPercentage: number;
-  id: number;
-  images: string[];
-  price: number;
-  rating: number;
-  stock: number;
-  thumbnail: string;
-  title: string;
-}
-
-interface FetchProducts {
-  limit: number;
-  products: Product[];
-  skip: number;
-  total: number;
-}
+import type { Product, FetchProducts } from '~/types';
 
 const useProductStore = defineStore('products', {
   state() {
