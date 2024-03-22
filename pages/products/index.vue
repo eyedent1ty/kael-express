@@ -4,13 +4,11 @@
 
 <script setup lang="ts">
 const productStore = useProductStore();
-const route = useRoute();
+const search = useSearch();
 
-const products = computed(() => {
-  const keyword = route.query.keyword as string;
-  if (keyword !== null && keyword !== undefined) {
-    return productStore.productList.filter((product) => product.title.toLowerCase().includes(keyword.toLowerCase()));
-  }
-  return productStore.productList;
-})
+const products = computed(() =>
+  productStore.productList.filter((product) =>
+    product.title.toLowerCase().includes(search.value.toLowerCase())
+  )
+);
 </script>

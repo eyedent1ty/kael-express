@@ -1,7 +1,7 @@
 <template>
   <CategoryList />
   <VDivider></VDivider>
-  <main class="product-list justify-center ga-4 my-8">
+  <main class="product-list justify-center ga-4 my-8" v-if="products.length > 0">
     <Product
       v-for="product in props.products"
       :key="product.id"
@@ -10,7 +10,7 @@
       :thumbnail="product.thumbnail"
     />
   </main>
-  <p class="text-center">No Products Found.</p>
+  <p v-else class="text-center">No Products Found.</p>
 </template>
 
 <script setup>
