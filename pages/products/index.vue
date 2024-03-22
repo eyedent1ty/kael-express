@@ -1,4 +1,6 @@
 <template>
+  <CategoryList />
+  <VDivider></VDivider>
   <ProductList :products="products" />
 </template>
 
