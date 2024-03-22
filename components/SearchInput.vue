@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex flex-column">
+  <VForm @submit="onSearchSubmit" class="d-flex flex-column">
     <VTextField
       v-model="search"
       placeholder="Sign up and get 100% off on your first order"
@@ -23,11 +23,23 @@
         >Bra For Women Set 6 Pcs Non Wire</VListItem
       >
     </VList>
-  </div>
+  </VForm>
 </template>
 
 <script setup lang="ts">
 const search = useSearch();
+const router = useRouter();
+
+const onSearchSubmit = (e: SubmitEvent) => {
+  e.preventDefault();
+
+  if (search.value === '') {
+    router.push('/products');
+    return;
+  }
+
+  router.push(`/products?keyword=${search.value}`);
+};
 </script>
 
 <style scoped>
