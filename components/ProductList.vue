@@ -10,6 +10,7 @@
       :thumbnail="product.thumbnail"
     />
   </main>
+  <p class="text-center">No Products Found.</p>
 </template>
 
 <script setup>
