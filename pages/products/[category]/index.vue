@@ -9,7 +9,6 @@
 </template>
 
 <script setup lang="ts">
-// Breadcrumbs
 const route = useRoute();
 const category = route.params.category as string;
 const productStore = useProductStore();
@@ -27,7 +26,7 @@ const items = [
   },
   {
     title: category,
-    disabled: false,
+    disabled: true,
     href: `/products/${category}`
   }
 ];
