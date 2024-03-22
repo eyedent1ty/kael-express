@@ -13,22 +13,22 @@
       </template>
     </VTextField>
     <VList class="d-flex suggestions">
-      <VListItem class="py-0 suggestion text-white"
-        >Camping Chair Buy 1 Take 1</VListItem
-      >
-      <VListItem class="py-0 suggestion text-white"
-        >Flat Sandal For Women</VListItem
-      >
-      <VListItem class="py-0 suggestion text-white"
-        >Bra For Women Set 6 Pcs Non Wire</VListItem
-      >
+      <Category
+        v-for="suggestion in suggestions"
+        :key="suggestion"
+        :name="suggestion"
+        class="py-0 suggestion"
+      />
     </VList>
   </VForm>
 </template>
 
 <script setup lang="ts">
+import { generateRandomNumber } from '~/utils/index';
+
 const search = useSearch();
 const router = useRouter();
+const categoryStore = useCategoryStore();
 
 const onSearchSubmit = (e: SubmitEvent) => {
   e.preventDefault();
@@ -40,6 +40,14 @@ const onSearchSubmit = (e: SubmitEvent) => {
 
   router.push(`/products?keyword=${search.value}`);
 };
+
+const suggestions: string[] = [];
+const categoriesCopy = [...categoryStore.categoryList];
+
+for (let i = 0; i < 3; i++) {
+  const idx = generateRandomNumber(0, categoriesCopy.length - 1);
+  suggestions[i] = categoriesCopy.splice(idx, 1)[0];
+}
 </script>
 
 <style scoped>
@@ -49,8 +57,8 @@ const onSearchSubmit = (e: SubmitEvent) => {
   padding: 0;
 }
 
-.suggestion {
-  min-height: 24px !important;
+.suggestion :deep(a) {
+  color: white;
 }
 
 .v-input :deep(input) {
