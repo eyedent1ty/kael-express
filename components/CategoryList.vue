@@ -9,7 +9,5 @@
 </template>
 
 <script setup lang="ts">
-const categoryStore = useCategoriesStore();
-
-categoryStore.fetchCategories();
+const categoryStore = useCategoryStore();
 </script>
