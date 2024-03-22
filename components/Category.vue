@@ -1,5 +1,9 @@
 <template>
-  <VListItem>{{ props.name }}</VListItem>
+  <VListItem>
+    <RouterLink :to="`/products/${props.name}`">
+      {{ props.name }}
+    </RouterLink>
+  </VListItem>
 </template>
 
 <script setup lang="ts">

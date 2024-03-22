@@ -10,3 +10,8 @@ body {
 .logo-brand {
   font-family: 'Noto Sans Khojki';
 }
+
+a {
+  text-decoration: none;
+  color: black;
+}

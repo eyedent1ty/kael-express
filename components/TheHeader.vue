@@ -73,7 +73,6 @@ header {
 }
 
 a {
-  text-decoration: none;
   color: white;
 }
 
