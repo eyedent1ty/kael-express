@@ -13,12 +13,6 @@
 </template>
 
 <script setup>
-const productStore = useProductStore();
-const categoryStore = useCategoriesStore();
-
-productStore.fetchProducts();
-categoryStore.fetchCategories();
-
 const props = defineProps({
   products: {
     type: Array,

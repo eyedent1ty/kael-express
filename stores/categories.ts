@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 
-const useCategoriesStore = defineStore('categories', {
+const useCategoryStore = defineStore('categories', {
   state: () => ({ categories: [] as string[] }),
   getters: {
     categoryList(state) {
@@ -23,4 +23,4 @@ const useCategoriesStore = defineStore('categories', {
   }
 });
 
-export { useCategoriesStore };
+export { useCategoryStore };
