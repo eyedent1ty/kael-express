@@ -1,6 +1,6 @@
 <template>
   <VListItem>
-    <RouterLink :to="`/products/${props.name}`">
+    <RouterLink :to="`/products/?category=${props.name}`">
       {{ props.name }}
     </RouterLink>
   </VListItem>
