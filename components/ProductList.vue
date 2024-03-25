@@ -3,6 +3,7 @@
     <Product
       v-for="product in props.products"
       :key="product.id"
+      :id="product.id"
       :title="product.title"
       :price="product.price"
       :thumbnail="product.thumbnail"
