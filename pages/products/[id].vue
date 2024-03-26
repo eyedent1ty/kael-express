@@ -52,7 +52,14 @@
       </div>
 
       <div class="d-flex ga-5">
-        <Button width="200px" size="large" outlined prepend-icon="mdi-cart">Add To Cart</Button>
+        <Button
+          width="200px"
+          size="large"
+          outlined
+          prepend-icon="mdi-cart"
+          @click="onClickAddToCart"
+          >Add To Cart</Button
+        >
         <Button width="200px" size="large">Buy Now</Button>
       </div>
     </div>
@@ -60,6 +67,8 @@
 </template>
 
 <script setup lang="ts">
+import type { CartItem } from '~/types';
+
 const route = useRoute();
 const productStore = useProductStore();
 const productId = Number(route.params.id);
@@ -102,6 +111,15 @@ const items = [
     href: `/products/${selectedProduct.title}`
   }
 ];
+
+// ADD TO CART
+const cartStore = useCartStore();
+
+const onClickAddToCart = () => {
+  cartStore.addToCart(selectedProduct);
+
+  console.log(cartStore.cart);
+};
 </script>
 
 <style scoped>

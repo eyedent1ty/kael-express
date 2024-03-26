@@ -19,4 +19,8 @@ interface FetchProducts {
   total: number;
 }
 
-export type { Product, FetchProducts };
+interface CartItem extends Product {
+  quantity: number;
+}
+
+export type { Product, FetchProducts, CartItem };
