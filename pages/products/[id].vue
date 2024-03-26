@@ -50,6 +50,11 @@
           </template>
         </v-text-field>
       </div>
+
+      <div class="d-flex ga-5">
+        <Button width="200px" size="large" outlined prepend-icon="mdi-cart">Add To Cart</Button>
+        <Button width="200px" size="large">Buy Now</Button>
+      </div>
     </div>
   </main>
 </template>
