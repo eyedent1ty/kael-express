@@ -1,5 +1,5 @@
 <template>
-  <VListItem>
+  <VListItem density="compact">
     <RouterLink :to="`/products/?category=${props.name}`">
       {{ props.name }}
     </RouterLink>

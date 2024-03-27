@@ -1,75 +1,75 @@
 <template>
-  <header class="px-sm-16 py-2">
-    <div class="d-flex justify-space-between text-body-2 mb-4">
-      <div class="d-flex">
-        <RouterLink to="/" class="mx-3">Home</RouterLink>
-        <VDivider vertical></VDivider>
-        <p class="mx-3 d-flex align-items-center">
-          Follow us on
-          <VIcon icon="mdi-facebook"></VIcon>
-          <VIcon icon="mdi-instagram"></VIcon>
-        </p>
-      </div>
-      <div class="d-flex">
-        <p class="mx-3 d-flex align-center">
-          <VIcon icon="mdi-help-circle-outline" size="20"></VIcon>
-          Help
-        </p>
-        <VDivider vertical></VDivider>
-        <p class="font-weight-bold mx-3">Sign up</p>
-        <VDivider vertical></VDivider>
-        <p class="font-weight-bold mx-3">Sign in</p>
-      </div>
-    </div>
+  <header class="px-4 px-sm-16 py-4">
+    <VRow justify="space-between" class="text-body-2">
+      <VCol>
+        <VRow justify="start">
+          <RouterLink to="/" class="mx-3">Home</RouterLink>
+          <VDivider vertical></VDivider>
+          <p class="mx-3 d-flex align-items-center">
+            Follow us on
+            <VIcon icon="mdi-facebook"></VIcon>
+            <VIcon icon="mdi-instagram"></VIcon>
+          </p>
+        </VRow>
+      </VCol>
+      <VCol>
+        <VRow justify="end">
+          <p class="mx-3 d-flex align-center">
+            <VIcon icon="mdi-help-circle-outline" size="20"></VIcon>
+            Help
+          </p>
+          <VDivider vertical></VDivider>
+          <p class="font-weight-bold mx-3">Sign up</p>
+          <VDivider vertical></VDivider>
+          <p class="font-weight-bold mx-3">Sign in</p>
+        </VRow>
+      </VCol>
+    </VRow>
 
-    <div class="d-flex align-start ga-16">
-      <div class="d-flex align-start">
+    <VRow>
+      <VCol cols="12" md="4">
         <RouterLink to="/">
           <div class="d-flex align-center">
             <VIcon icon="mdi-store" size="50"></VIcon>
             <h1>Kael Express</h1>
           </div>
         </RouterLink>
-      </div>
+      </VCol>
 
-      <SearchInput class="flex-1" />
+      <VCol cols="12" md="6">
+        <SearchInput />
+      </VCol>
 
-      <VMenu class="flex-1">
-        <template #activator="{ props }">
-          <VBtn variant="outlined" v-bind="props" prepend-icon="mdi-cart">
-            Cart
-          </VBtn>
-        </template>
+      <VCol cols="12" md="2" class="d-flex justify-center justify-sm-end">
+        <VMenu>
+          <template #activator="{ props }">
+            <VBtn variant="outlined" v-bind="props" prepend-icon="mdi-cart">
+              Cart
+            </VBtn>
+          </template>
 
-        <VCard
-          min-width="300"
-          min-height="300"
-          class="d-flex justify-center align-center"
-        >
-          <p>No Products Yet :)</p>
+          <VCard
+            min-width="300"
+            min-height="300"
+            class="d-flex justify-center align-center"
+          >
+            <p>No Products Yet :)</p>
 
-          <!-- ADD PRODUCTS HERE -->
-          <!-- <VList>
+            <!-- ADD PRODUCTS HERE -->
+            <!-- <VList>
             <VListItem></VListItem>
           </VList> -->
-        </VCard>
-      </VMenu>
-    </div>
+          </VCard>
+        </VMenu>
+      </VCol>
+    </VRow>
   </header>
 </template>
-
-<script setup lang="ts">
-const search = useSearch();
-</script>
 
 <style scoped>
 header {
   background: linear-gradient(-180deg, #f53d2d, #f63);
   color: #fff;
-}
-
-.flex-1 {
-  flex: 1;
 }
 
 a {

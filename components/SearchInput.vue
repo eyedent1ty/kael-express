@@ -1,25 +1,31 @@
 <template>
   <VForm @submit="onSearchSubmit" class="d-flex flex-column">
-    <VTextField
-      v-model="search"
-      placeholder="Sign up and get 100% off on your first order"
-      density="compact"
-      hide-details="auto"
-    >
-      <template #append>
-        <VBtn variant="outlined" prepend-icon="mdi-magnify" type="submit"
-          >Search</VBtn
+    <VRow>
+      <VCol cols="12" sm="9" class="pb-0">
+        <VTextField
+          v-model="search"
+          placeholder="Sign up and get 100% off on your first order"
+          density="compact"
+          hide-details="auto"
         >
-      </template>
-    </VTextField>
-    <VList class="d-flex suggestions">
-      <Category
-        v-for="suggestion in suggestions"
-        :key="suggestion"
-        :name="suggestion"
-        class="py-0 suggestion"
-      />
-    </VList>
+        </VTextField>
+      </VCol>
+
+      <VCol cols="12" sm="3" class="d-flex justify-center justify-sm-start px-md-0 px-lg-3 pb-0">
+        <VBtn variant="outlined" prepend-icon="mdi-magnify" type="submit">Search</VBtn>
+      </VCol>
+
+      <VCol v-if="$vuetify.display.smAndUp" sm="12" class="pt-0">
+        <VList class="d-flex suggestions">
+          <Category
+            v-for="suggestion in suggestions"
+            :key="suggestion"
+            :name="suggestion"
+            class="py-0 suggestion"
+          />
+        </VList>
+      </VCol>
+    </VRow>
   </VForm>
 </template>
 
