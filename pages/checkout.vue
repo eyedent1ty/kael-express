@@ -159,7 +159,7 @@ const onClickCheckout = () => {
 }
 
 .discount-percentage {
-  color: #ee4d2d;
+  color: var(--primary-color);
   background-color: white;
   font-size: 12px;
 }
@@ -180,7 +180,7 @@ const onClickCheckout = () => {
 }
 
 .checkout__footer__total-price {
-  color: #ee4d2d;
+  color: var(--primary-color);
   font-size: 2rem;
   font-weight: 500;
 }

@@ -17,13 +17,13 @@ const props = defineProps({
 
 <style scoped>
 .v-btn {
-  background-color: #ee4d2d;
+  background-color: var(--primary-color);
   color: white;
 }
 
 .outlined {
-  border-color: #ee4d2d;
+  border-color: var(--primary-color);
   background-color: transparent;
-  color: #ee4d2d;
+  color: var(--primary-color);
 }
 </style>
