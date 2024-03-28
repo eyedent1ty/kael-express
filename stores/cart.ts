@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import type { Product, CartItem } from '~/types';
+import { getDiscountedPrice } from '~/utils';
 
 const useCartStore = defineStore('cart', {
   state() {
@@ -10,6 +11,21 @@ const useCartStore = defineStore('cart', {
   getters: {
     cart(): CartItem[] {
       return this.cartState;
+    },
+    getLength(): number {
+      return this.cartState.length;
+    },
+    totalPrice(): number {
+      return this.cartState.reduce((total, currentItem) => {
+        return (
+          total +
+          getDiscountedPrice(
+            currentItem.price,
+            currentItem.discountPercentage
+          ) *
+            currentItem.quantity
+        );
+      }, 0);
     }
   },
   actions: {
