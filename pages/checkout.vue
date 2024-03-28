@@ -14,8 +14,8 @@
         </thead>
         <tbody>
           <tr v-for="item in cartStore.cart">
-            <td class="d-flex align-center ga-10">
-              <VAvatar :image="item.thumbnail" size="x-large"></VAvatar>
+            <td>
+              <VAvatar :image="item.thumbnail" size="x-large" class="mr-10"></VAvatar>
               {{ item.title }}
             </td>
             <td>
@@ -28,12 +28,17 @@
                   ).toFixed(2)
                 }}
               </span>
+              <p class="discount-percentage">Discount {{ item.discountPercentage }}%         <VBadge
+          color="#ee4d2d"
+          content="Updated"
+          inline
+        ></VBadge></p>
             </td>
-            <td class="d-flex justify-center align-center">
+            <td>
               <v-text-field
                 type="number"
                 density="compact"
-                class="pa-0"
+                class="pa-0 mx-auto"
                 v-model="item.quantity"
               >
                 <template v-slot:prepend>
@@ -121,6 +126,12 @@ const onClickIncrementQuantity = (item: CartItem) => {
 .original-price,
 .discounted-price {
   font-size: 1rem;
+}
+
+.discount-percentage {
+  color: #ee4d2d;
+  background-color: white;
+  font-size: 12px;
 }
 
 .checkout {
