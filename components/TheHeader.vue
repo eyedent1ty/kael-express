@@ -42,13 +42,17 @@
       <VCol cols="12" md="2" class="d-flex justify-center justify-sm-end">
         <VMenu>
           <template #activator="{ props }">
-            <VBtn variant="outlined" v-bind="props" prepend-icon="mdi-cart">
-              Cart
-            </VBtn>
+            <VBadge color="white" :content="cartStore.cart.length">
+              <VBtn variant="outlined" v-bind="props" prepend-icon="mdi-cart">
+                Cart
+              </VBtn>
+            </VBadge>
           </template>
 
           <VCard min-width="300" min-height="300" class="relative">
-            <p v-if="cartStore.cart.length === 0">No Products Yet :)</p>
+            <p class="empty-cart-message" v-if="cartStore.cart.length === 0">
+              No Products Yet :)
+            </p>
 
             <VList v-else>
               <VListItem
@@ -62,7 +66,10 @@
               </VListItem>
             </VList>
 
-            <Button @click="onClickCheckout" class="w-100 absolute bottom-0"
+            <Button
+              v-if="cartStore.cart.length > 0"
+              @click="onClickCheckout"
+              class="w-100 absolute bottom-0"
               >Go to Checkout</Button
             >
 
@@ -79,9 +86,10 @@
 
 <script setup lang="ts">
 const cartStore = useCartStore();
+const router = useRouter();
 
-const onClickCheckout = (e: Event) => {
-  e.stopPropagation();
+const onClickCheckout = () => {
+  router.push('/checkout');
 };
 </script>
 
@@ -110,5 +118,12 @@ a:visited {
 
 .bottom-0 {
   bottom: 0;
+}
+
+.empty-cart-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>
