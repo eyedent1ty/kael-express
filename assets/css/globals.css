@@ -25,6 +25,10 @@ a {
   text-decoration: underline;
 }
 
+.text-color-primary {
+  color: var(--primary-color);
+}
+
 .original-price {
   text-decoration: line-through;
   color: var(--secondary-color);

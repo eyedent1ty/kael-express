@@ -1,6 +1,6 @@
 <template>
   <main class="checkout ma-sm-8 ma-md-16">
-    <h2 v-if="cartStore.isCartEmpty()" class="text-center">Cart is Empty :)</h2>
+    <h2 v-if="cartStore.isCartEmpty()" class="text-color-primary text-center">No Products Yet :)</h2>
     <div v-else>
       <VTable>
         <thead>
