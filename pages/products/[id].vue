@@ -137,24 +137,6 @@ const onClickAddToCart = () => {
 </script>
 
 <style scoped>
-.original-price {
-  text-decoration: line-through;
-  color: #929292;
-  font-weight: normal;
-  font-size: 1rem;
-}
-
-.discounted-price {
-  color: #ee4d2d;
-  font-size: 1.875rem;
-  font-weight: 500;
-}
-
-.discount-percentage {
-  background-color: #ee4d2d;
-  color: white;
-}
-
 .quantity {
   max-width: 150px;
 }

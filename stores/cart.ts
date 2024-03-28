@@ -21,13 +21,22 @@ const useCartStore = defineStore('cart', {
         selectedCartItem.quantity++;
       }
     },
+    removeFromCart(itemId: number): void {
+      const idx = this.cartState.findIndex(
+        (cartItem) => cartItem.id === itemId
+      );
+      this.cartState.splice(idx, 1);
+    },
     isProductAlreadyExists(product: Product) {
-      const idx = this.cart.findIndex((p)  => p.id === product.id);
+      const idx = this.cart.findIndex((p) => p.id === product.id);
 
       return idx >= 0 ? true : false;
     },
     getCartItemById(id: number): CartItem | undefined {
       return this.cartState.find((cartItem) => cartItem.id === id);
+    },
+    isCartEmpty(): boolean {
+      return this.cartState.length === 0 ? true : false;
     }
   }
 });
