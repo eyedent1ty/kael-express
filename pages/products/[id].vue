@@ -7,7 +7,7 @@
   <VDivider></VDivider>
 
   <VRow align="center" justify="center" class="pa-sm-10">
-    <VCol cols="12" md="6" class="mx-auto">
+    <VCol cols="12" md="6" class="mx-auto d-flex justify-center">
       <VCarousel class="carousel" hide-delimiters>
         <VCarouselItem v-for="image in images" :src="image">
         </VCarouselItem> </VCarousel
