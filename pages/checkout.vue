@@ -90,7 +90,7 @@
                 ${{ cartStore.totalPrice.toFixed(2) }}
               </p>
             </VCol>
-            <VCol cols="12" sm="6" class="d-flex justify-sm-end py-0">
+            <VCol cols="12" sm="6" class="d-flex justify-sm-end py-0 mb-3 mb-sm-0">
               <Button width="200px" size="large" @click="onClickCheckout"
                 >Check Out</Button
               >
