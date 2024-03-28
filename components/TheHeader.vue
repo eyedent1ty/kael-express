@@ -42,8 +42,8 @@
       <VCol cols="12" md="2" class="d-flex justify-center justify-sm-end">
         <VMenu>
           <template #activator="{ props }">
-            <VBadge color="white" :content="cartStore.cart.length">
-              <VBtn variant="outlined" v-bind="props" prepend-icon="mdi-cart">
+            <VBadge color="white" :content="cartStore.cart.length" class="w-100 cart-btn-contaioner">
+              <VBtn variant="outlined" v-bind="props" prepend-icon="mdi-cart" class="w-100">
                 Cart
               </VBtn>
             </VBadge>
