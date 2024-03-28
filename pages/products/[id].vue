@@ -6,19 +6,20 @@
   </VBreadcrumbs>
   <VDivider></VDivider>
 
-  <main class="d-flex align-center justify-content-center ga-10 pa-10">
-    <VCarousel class="carousel" hide-delimiters>
-      <VCarouselItem v-for="image in images" :src="image"> </VCarouselItem>
-    </VCarousel>
-
-    <div>
+  <VRow align="center" justify="center" class="pa-sm-10">
+    <VCol cols="12" md="6" class="mx-auto">
+      <VCarousel class="carousel" hide-delimiters>
+        <VCarouselItem v-for="image in images" :src="image">
+        </VCarouselItem> </VCarousel
+    ></VCol>
+    <VCol cols="12" md="6" class="text-center text-md-start">
       <h2>{{ title }}</h2>
       <p>{{ description }}</p>
-      <div class="d-flex align-center">
+      <div class="d-flex align-center justify-center justify-md-start">
         <p class="text-underline">{{ rating }}</p>
         <VRating :model-value="rating" half-increments readonly></VRating>
       </div>
-      <div class="d-flex align-center">
+      <div class="d-flex align-center justify-center justify-md-start">
         <h3 class="original-price">${{ price }}</h3>
         <h2 class="discounted-price">${{ discountedPrice }}</h2>
         <VBadge
@@ -27,12 +28,15 @@
           inline
         ></VBadge>
       </div>
-      <div class="quantity">
+      <div
+        class="d-flex align-center justify-center mx-auto mb-3 justify-md-start"
+      >
         <p>Quantity</p>
         <v-text-field
           type="number"
           v-model="selectedQuantity"
           density="compact"
+          class="quantity pa-0"
         >
           <template v-slot:prepend>
             <v-icon
@@ -51,19 +55,24 @@
         </v-text-field>
       </div>
 
-      <div class="d-flex ga-5">
-        <Button
-          width="200px"
-          size="large"
-          outlined
-          prepend-icon="mdi-cart"
-          @click="onClickAddToCart"
-          >Add To Cart</Button
-        >
-        <Button width="200px" size="large">Buy Now</Button>
-      </div>
-    </div>
-  </main>
+      <VRow justify="center" justify-md="start" class="buttons mx-auto mx-md-0">
+        <VCol cols="12" md="5">
+          <Button
+            width="200px"
+            size="large"
+            outlined
+            prepend-icon="mdi-cart"
+            @click="onClickAddToCart"
+            >Add To Cart</Button
+          >
+        </VCol>
+
+        <VCol cols="12" md="5" class="d-flex justify-center">
+          <Button width="200px" size="large">Buy Now</Button>
+        </VCol>
+      </VRow>
+    </VCol>
+  </VRow>
 </template>
 
 <script setup lang="ts">
@@ -147,5 +156,17 @@ const onClickAddToCart = () => {
 
 .carousel {
   max-width: 700px;
+}
+
+.v-text-field :deep(.v-input__details) {
+  display: none;
+}
+
+.buttons {
+  max-width: 500px;
+}
+
+.v-breadcrumbs {
+  flex-wrap: wrap;
 }
 </style>
