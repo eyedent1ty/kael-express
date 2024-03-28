@@ -51,9 +51,19 @@
           <VCard
             min-width="300"
             min-height="300"
-            class="d-flex justify-center align-center"
+            class="relative"
           >
-            <p>No Products Yet :)</p>
+            <p v-if="cartStore.cart.length === 0">No Products Yet :)</p>
+
+            <VList v-else>
+              <VListItem v-for="cartItem in cartStore.cart" :prepend-avatar="cartItem.thumbnail" :title="cartItem.title">
+                <template #append>
+                  <p class="pl-10">${{ cartItem.price }}</p>
+                </template>
+              </VListItem>
+            </VList>
+
+            <Button @click="onClickCheckout" class="w-100 absolute bottom-0">Go to Checkout</Button>
 
             <!-- ADD PRODUCTS HERE -->
             <!-- <VList>
@@ -65,6 +75,15 @@
     </VRow>
   </header>
 </template>
+
+<script setup lang="ts">
+const cartStore = useCartStore();
+
+const onClickCheckout = (e: Event) => {
+  e.stopPropagation();
+};
+</script>
+
 
 <style scoped>
 header {
@@ -79,5 +98,18 @@ a {
 a:active,
 a:visited {
   color: white;
+}
+
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.bottom-0 {
+  bottom: 0;
 }
 </style>

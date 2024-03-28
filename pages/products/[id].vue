@@ -77,8 +77,6 @@
 </template>
 
 <script setup lang="ts">
-import type { CartItem } from '~/types';
-
 const route = useRoute();
 const productStore = useProductStore();
 const productId = Number(route.params.id);
