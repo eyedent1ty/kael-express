@@ -1,5 +1,5 @@
 <template>
-  <main class="checkout ma-16">
+  <main class="checkout ma-sm-8 ma-md-16">
     <h2 v-if="cartStore.isCartEmpty()" class="text-center">Cart is Empty :)</h2>
     <div v-else>
       <VTable>
@@ -39,21 +39,32 @@
               }}
             </td>
             <td>
-              <Button outlined @click="onClickDeleteCartItem(item.id)">Delete</Button>
+              <Button outlined @click="onClickDeleteCartItem(item.id)"
+                >Delete</Button
+              >
             </td>
           </tr>
         </tbody>
       </VTable>
-      <footer class="checkout__footer d-flex justify-end">
-        <div class="d-flex align-center ga-2">
-          <p>
-            Total ({{ cartStore.getLength }}
-            {{ cartStore.getLength > 1 ? 'items' : 'item' }}):
-          </p>
-          <p class="checkout__footer__total-price">${{ cartStore.totalPrice.toFixed(2) }}</p>
-          <Button width="200px" size="large">Check Out</Button>
-        </div>
-      </footer>
+      <VRow class="checkout__footer w-100">
+        <VCol cols="12">
+          <VRow align="center" justify="center" justify-md="end">
+            <VCol cols="12" sm="6" class="d-flex align-center ga-3 py-0">
+              <p>
+                Total ({{ cartStore.getLength }}
+                {{ cartStore.getLength > 1 ? 'items' : 'item' }}):
+              </p>
+              <p class="checkout__footer__total-price">
+                ${{ cartStore.totalPrice.toFixed(2) }}
+              </p>
+            </VCol>
+
+            <VCol cols="12" sm="6" class="d-flex justify-sm-end py-0">
+              <Button width="200px" size="large">Check Out</Button>
+            </VCol>
+          </VRow>
+        </VCol>
+      </VRow>
     </div>
   </main>
 </template>
