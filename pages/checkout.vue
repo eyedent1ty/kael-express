@@ -7,15 +7,15 @@
           <tr>
             <th class="text-left">Product</th>
             <th class="text-left">Unit Price</th>
-            <th class="text-left">Quantity</th>
+            <th class="text-center">Quantity</th>
             <th class="text-left">Total Price</th>
-            <th class="text-left">Actions</th>
+            <th class="text-center">Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="item in cartStore.cart">
             <td class="d-flex align-center ga-10">
-              <VAvatar :image="item.thumbnail"></VAvatar>
+              <VAvatar :image="item.thumbnail" size="x-large"></VAvatar>
               {{ item.title }}
             </td>
             <td>
@@ -29,7 +29,29 @@
                 }}
               </span>
             </td>
-            <td>{{ item.quantity }}</td>
+            <td class="d-flex justify-center align-center">
+              <v-text-field
+                type="number"
+                density="compact"
+                class="pa-0"
+                v-model="item.quantity"
+              >
+                <template v-slot:prepend>
+                  <v-icon
+                    color="red"
+                    icon="mdi-minus"
+                    @click="onClickDecrementQuantity(item)"
+                  ></v-icon>
+                </template>
+                <template v-slot:append>
+                  <v-icon
+                    color="green"
+                    icon="mdi-plus"
+                    @click="onClickIncrementQuantity(item)"
+                  ></v-icon>
+                </template>
+              </v-text-field>
+            </td>
             <td>
               ${{
                 (
@@ -38,7 +60,7 @@
                 ).toFixed(2)
               }}
             </td>
-            <td>
+            <td class="checkout__delete">
               <Button outlined @click="onClickDeleteCartItem(item.id)"
                 >Delete</Button
               >
@@ -58,7 +80,6 @@
                 ${{ cartStore.totalPrice.toFixed(2) }}
               </p>
             </VCol>
-
             <VCol cols="12" sm="6" class="d-flex justify-sm-end py-0">
               <Button width="200px" size="large">Check Out</Button>
             </VCol>
@@ -70,12 +91,29 @@
 </template>
 
 <script setup lang="ts">
+import type { CartItem } from '~/types';
 import { getDiscountedPrice } from '~/utils';
 
 const cartStore = useCartStore();
 
 const onClickDeleteCartItem = (itemId: number): void => {
   cartStore.removeFromCart(itemId);
+};
+
+const onClickDecrementQuantity = (item: CartItem) => {
+  if (item.quantity === 1) {
+    return;
+  }
+  item.quantity--;
+};
+
+const onClickIncrementQuantity = (item: CartItem) => {
+  const { stock } = item;
+
+  if (item.quantity === stock) {
+    return;
+  }
+  item.quantity++;
 };
 </script>
 
@@ -90,6 +128,10 @@ const onClickDeleteCartItem = (itemId: number): void => {
   min-height: 500px;
 }
 
+.checkout__delete {
+  text-align: center;
+}
+
 .checkout__footer {
   position: absolute;
   bottom: 0;
@@ -101,4 +143,14 @@ const onClickDeleteCartItem = (itemId: number): void => {
   font-size: 2rem;
   font-weight: 500;
 }
+
+.v-text-field {
+  min-width: 150px;
+  max-width: 100px;
+}
+
+.v-text-field :deep(.v-input__details) {
+  display: none;
+}
+
 </style>
