@@ -6,7 +6,7 @@
   </VBreadcrumbs>
   <VDivider></VDivider>
 
-  <VRow align="center" justify="center" class="pa-sm-10">
+  <VRow align="center" justify="center" class="pa-sm-10 relative">
     <VCol cols="12" md="6" class="mx-auto d-flex justify-center">
       <VCarousel class="carousel" hide-delimiters>
         <VCarouselItem v-for="image in images" :src="image">
@@ -66,6 +66,17 @@
             @click="onClickAddToCart"
             >Add To Cart</Button
           >
+
+          <v-snackbar class="snackbar" v-model="snackbar" color="#ee4d2d" position="absolute">
+            <VIcon icon="mdi-check" size="x-large"></VIcon>
+            Item has been added to your shopping cart
+
+            <template v-slot:actions>
+              <v-btn color="white" variant="text" @click="snackbar = false">
+                x
+              </v-btn>
+            </template>
+          </v-snackbar>
         </VCol>
 
         <VCol cols="12" md="5" class="d-flex justify-center">
@@ -128,11 +139,11 @@ const items = [
 
 // ADD TO CART
 const cartStore = useCartStore();
+const snackbar = ref(false);
 
 const onClickAddToCart = () => {
   cartStore.addToCart(selectedProduct);
-
-  console.log(cartStore.cart);
+  snackbar.value = true;
 };
 </script>
 
