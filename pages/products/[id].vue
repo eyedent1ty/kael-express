@@ -67,10 +67,9 @@
             >Add To Cart</Button
           >
 
-          <v-snackbar class="snackbar" v-model="snackbar" color="#ee4d2d" position="absolute">
+          <v-snackbar class="snackbar" v-model="snackbar" color="#ee4d2d">
             <VIcon icon="mdi-check" size="x-large"></VIcon>
             Item has been added to your shopping cart
-
             <template v-slot:actions>
               <v-btn color="white" variant="text" @click="snackbar = false">
                 x
@@ -80,7 +79,9 @@
         </VCol>
 
         <VCol cols="12" md="5" class="d-flex justify-center">
-          <Button width="200px" size="large">Buy Now</Button>
+          <Button width="200px" size="large" @click="onClickBuyNow"
+            >Buy Now</Button
+          >
         </VCol>
       </VRow>
     </VCol>
@@ -140,10 +141,16 @@ const items = [
 // ADD TO CART
 const cartStore = useCartStore();
 const snackbar = ref(false);
+const router = useRouter();
 
 const onClickAddToCart = () => {
   cartStore.addToCart(selectedProduct);
   snackbar.value = true;
+};
+
+const onClickBuyNow = () => {
+  cartStore.addToCart(selectedProduct);
+  router.push('/checkout');
 };
 </script>
 
