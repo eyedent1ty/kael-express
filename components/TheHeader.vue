@@ -5,8 +5,7 @@
         <VRow justify="start">
           <RouterLink to="/" class="mx-3">Home</RouterLink>
           <VDivider vertical></VDivider>
-          <p class="mx-3 d-flex align-items-center">
-            Follow us on
+          <p class="ml-3 d-flex ga-2">
             <VIcon icon="mdi-facebook"></VIcon>
             <VIcon icon="mdi-instagram"></VIcon>
           </p>
@@ -14,14 +13,14 @@
       </VCol>
       <VCol>
         <VRow justify="end">
+          <p class="font-weight-bold mx-3">Sign up</p>
+          <VDivider vertical></VDivider>
+          <p class="font-weight-bold mx-3">Sign in</p>
+          <VDivider vertical></VDivider>
           <p class="mx-3 d-flex align-center">
             <VIcon icon="mdi-help-circle-outline" size="20"></VIcon>
             Help
           </p>
-          <VDivider vertical></VDivider>
-          <p class="font-weight-bold mx-3">Sign up</p>
-          <VDivider vertical></VDivider>
-          <p class="font-weight-bold mx-3">Sign in</p>
         </VRow>
       </VCol>
     </VRow>
@@ -48,22 +47,24 @@
             </VBtn>
           </template>
 
-          <VCard
-            min-width="300"
-            min-height="300"
-            class="relative"
-          >
+          <VCard min-width="300" min-height="300" class="relative">
             <p v-if="cartStore.cart.length === 0">No Products Yet :)</p>
 
             <VList v-else>
-              <VListItem v-for="cartItem in cartStore.cart" :prepend-avatar="cartItem.thumbnail" :title="cartItem.title">
+              <VListItem
+                v-for="cartItem in cartStore.cart"
+                :prepend-avatar="cartItem.thumbnail"
+                :title="cartItem.title"
+              >
                 <template #append>
                   <p class="pl-10">${{ cartItem.price }}</p>
                 </template>
               </VListItem>
             </VList>
 
-            <Button @click="onClickCheckout" class="w-100 absolute bottom-0">Go to Checkout</Button>
+            <Button @click="onClickCheckout" class="w-100 absolute bottom-0"
+              >Go to Checkout</Button
+            >
 
             <!-- ADD PRODUCTS HERE -->
             <!-- <VList>
@@ -84,7 +85,6 @@ const onClickCheckout = (e: Event) => {
 };
 </script>
 
-
 <style scoped>
 header {
   background: linear-gradient(-180deg, #f53d2d, #f63);
@@ -99,7 +99,6 @@ a:active,
 a:visited {
   color: white;
 }
-
 
 .relative {
   position: relative;
