@@ -53,6 +53,9 @@ const useCartStore = defineStore('cart', {
     },
     isCartEmpty(): boolean {
       return this.cartState.length === 0 ? true : false;
+    },
+    emptyCart(): void {
+      this.cartState = [];
     }
   }
 });

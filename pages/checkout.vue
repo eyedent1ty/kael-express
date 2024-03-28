@@ -15,7 +15,11 @@
         <tbody>
           <tr v-for="item in cartStore.cart">
             <td>
-              <VAvatar :image="item.thumbnail" size="x-large" class="mr-10"></VAvatar>
+              <VAvatar
+                :image="item.thumbnail"
+                size="x-large"
+                class="mr-10"
+              ></VAvatar>
               {{ item.title }}
             </td>
             <td>
@@ -28,11 +32,10 @@
                   ).toFixed(2)
                 }}
               </span>
-              <p class="discount-percentage">Discount {{ item.discountPercentage }}%         <VBadge
-          color="#ee4d2d"
-          content="Updated"
-          inline
-        ></VBadge></p>
+              <p class="discount-percentage">
+                Discount {{ item.discountPercentage }}%
+                <VBadge color="#ee4d2d" content="Updated" inline></VBadge>
+              </p>
             </td>
             <td>
               <v-text-field
@@ -86,12 +89,30 @@
               </p>
             </VCol>
             <VCol cols="12" sm="6" class="d-flex justify-sm-end py-0">
-              <Button width="200px" size="large">Check Out</Button>
+              <Button width="200px" size="large" @click="onClickCheckout"
+                >Check Out</Button
+              >
             </VCol>
           </VRow>
         </VCol>
       </VRow>
     </div>
+    <v-snackbar
+      class="snackbar"
+      v-model="snackbar"
+      color="#ee4d2d"
+      position="absolute"
+      close-delay="5000"
+    >
+      <VIcon icon="mdi-check" size="x-large"></VIcon>
+      Item has been added to your shopping cart
+
+      <template v-slot:actions>
+        <v-btn color="white" variant="text" @click="snackbar = false">
+          x
+        </v-btn>
+      </template>
+    </v-snackbar>
   </main>
 </template>
 
@@ -100,6 +121,7 @@ import type { CartItem } from '~/types';
 import { getDiscountedPrice } from '~/utils';
 
 const cartStore = useCartStore();
+const snackbar = ref(false);
 
 const onClickDeleteCartItem = (itemId: number): void => {
   cartStore.removeFromCart(itemId);
@@ -119,6 +141,14 @@ const onClickIncrementQuantity = (item: CartItem) => {
     return;
   }
   item.quantity++;
+};
+
+const onClickCheckout = () => {
+  snackbar.value = true;
+
+  setTimeout(() => {
+    cartStore.emptyCart();
+  }, 4000);
 };
 </script>
 
@@ -163,5 +193,4 @@ const onClickIncrementQuantity = (item: CartItem) => {
 .v-text-field :deep(.v-input__details) {
   display: none;
 }
-
 </style>
