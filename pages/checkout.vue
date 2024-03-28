@@ -15,12 +15,14 @@
         <tbody>
           <tr v-for="item in cartStore.cart">
             <td>
-              <VAvatar
+              <RouterLink :to="`/products/${item.id}`">
+                <VAvatar
                 :image="item.thumbnail"
                 size="x-large"
                 class="mr-10"
               ></VAvatar>
               {{ item.title }}
+              </RouterLink>
             </td>
             <td>
               <span class="original-price"> ${{ item.price.toFixed(2) }} </span>
