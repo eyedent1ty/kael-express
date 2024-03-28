@@ -2,11 +2,23 @@
 import '@mdi/font/css/materialdesignicons.css';
 
 import 'vuetify/styles';
-import { createVuetify } from 'vuetify';
+import { createVuetify, type ThemeDefinition } from 'vuetify';
+
+const myCustomLightTheme: ThemeDefinition = {
+  dark: false,
+  colors: {
+    primary: '#ee4d2d'
+  }
+};
 
 export default defineNuxtPlugin((app) => {
   const vuetify = createVuetify({
-    // ... your configuration
+    theme: {
+      defaultTheme: 'myCustomLightTheme',
+      themes: {
+        myCustomLightTheme
+      }
+    }
   });
   app.vueApp.use(vuetify);
 });
