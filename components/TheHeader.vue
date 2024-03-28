@@ -126,4 +126,8 @@ a:visited {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.v-badge :deep(.v-badge__badge) {
+  color: var(--primary-color) !important;
+}
 </style>
