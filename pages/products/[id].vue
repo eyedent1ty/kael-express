@@ -28,6 +28,7 @@
           inline
         ></VBadge>
       </div>
+      <p class="stock">{{ stock }} pieces available</p>
       <div
         class="d-flex align-center justify-center mx-auto mb-3 justify-md-start"
       >
@@ -86,7 +87,7 @@ const selectedProduct = productStore.productList.find(
   (product) => product.id === productId
 )!;
 
-const { title, description, rating, price, discountPercentage, images } =
+const { title, description, rating, price, discountPercentage, images, stock } =
   selectedProduct;
 const discountedPrice = Math.floor(price * (1 - discountPercentage / 100));
 const selectedQuantity = ref(1);
@@ -168,5 +169,9 @@ const onClickAddToCart = () => {
 
 .v-breadcrumbs {
   flex-wrap: wrap;
+}
+
+.stock {
+  color: #757575;
 }
 </style>
