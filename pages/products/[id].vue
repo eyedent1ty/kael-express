@@ -95,6 +95,10 @@ watch(selectedQuantity, (newValue) => {
   if (newValue < 1) {
     selectedQuantity.value = 1;
   }
+
+  if (newValue > stock) {
+    selectedQuantity.value = stock;
+  }
 });
 
 const items = [
