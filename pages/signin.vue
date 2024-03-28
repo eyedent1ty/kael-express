@@ -11,7 +11,6 @@
     </VRow>
   </header>
   <main class="bg-primary">
-    qwe
     <VRow></VRow>
   </main>
 </template>
