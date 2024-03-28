@@ -77,6 +77,8 @@
 </template>
 
 <script setup lang="ts">
+import { getDiscountedPrice } from '~/utils';
+
 const route = useRoute();
 const productStore = useProductStore();
 const productId = Number(route.params.id);
@@ -87,7 +89,7 @@ const selectedProduct = productStore.productList.find(
 
 const { title, description, rating, price, discountPercentage, images, stock } =
   selectedProduct;
-const discountedPrice = Math.floor(price * (1 - discountPercentage / 100));
+const discountedPrice = getDiscountedPrice(price, discountPercentage);
 const selectedQuantity = ref(1);
 
 // Ensure that the minimum quantity is 1
