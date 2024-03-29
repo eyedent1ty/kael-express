@@ -105,6 +105,24 @@
 
           <VCard v-else class="pa-5 mx-auto" max-width="400">
             <h2 class="text-h6 font-weight-regular mb-5">Sign Up</h2>
+            <VCard
+              v-if="registerCredentials.error"
+              class="mb-5 pa-2 d-flex align-center ga-2"
+              color="error"
+              flat
+              hover
+              variant="outlined"
+            >
+              <VIcon
+                icon="mdi-alert-circle-outline"
+                color="error"
+                size="large"
+              ></VIcon>
+              <p class="text-error text-body-2">
+                Registration failed; please try again later or use different
+                registration method.
+              </p>
+            </VCard>
             <VForm @submit.prevent="onSubmitRegister">
               <VRow>
                 <VCol cols="6" class="pb-0"
