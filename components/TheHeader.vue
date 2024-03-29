@@ -15,7 +15,7 @@
         <VRow justify="end">
           <p class="font-weight-bold mx-3">Sign up</p>
           <VDivider vertical></VDivider>
-          <RouterLink to="/signin" class="font-weight-bold mx-3">Sign in</RouterLink>
+          <RouterLink to="/auth?type=login" class="font-weight-bold mx-3">Sign in</RouterLink>
           <VDivider vertical></VDivider>
           <p class="mx-3 d-flex align-center">
             <VIcon icon="mdi-help-circle-outline" size="20"></VIcon>
