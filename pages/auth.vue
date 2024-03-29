@@ -264,7 +264,11 @@ const onSubmitLogin = async () => {
   if (error.value) {
     loginCredentials.value.error = error;
   } else {
-    console.log(data);
+
+    if (data.value !== null) {
+      userStore.setUser(toRaw(data.value));
+    }
+
     router.push('/products');
   }
 };
