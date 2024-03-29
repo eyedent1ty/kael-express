@@ -19,4 +19,22 @@ model User {
   lastName String
   email String @unique
   password String
+  cart CartItem[]
+}
+
+model CartItem {
+  id Int @id
+  brand String
+  category String
+  description String
+  discountPercentage Decimal
+  images String[]
+  price Decimal
+  rating Decimal
+  stock Int
+  thumbnail String
+  title String
+  quantity Int
+  customer User @relation(fields: [customerId], references: [id])
+  customerId Int
 }
