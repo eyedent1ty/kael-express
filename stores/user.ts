@@ -27,6 +27,10 @@ const useUserStore = defineStore('user', {
     },
     logout() {
       this.userState = null;
+      localStorage.removeItem('id');
+      localStorage.removeItem('firstName');
+      localStorage.removeItem('lastName');
+      localStorage.removeItem('email');
     }
   }
 });

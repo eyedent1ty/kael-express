@@ -11,8 +11,7 @@ const productStore = useProductStore();
 const categoryStore = useCategoryStore();
 const userStore = useUserStore();
 
-productStore.fetchProducts();
-categoryStore.fetchCategories();
+
 
 onMounted(() => {
   const id = Number(localStorage.getItem('id'));
@@ -29,4 +28,7 @@ onMounted(() => {
     })
   }
 });
+
+productStore.fetchProducts();
+categoryStore.fetchCategories();
 </script>
