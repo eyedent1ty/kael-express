@@ -204,13 +204,9 @@ const rules = {
 };
 
 const onSubmitLogin = async () => {
-  const { email, password } = loginCredentials.value;
-  const { data } = await useFetch('/api/register', {
+  const response = await useFetch('/api/register', {
     method: 'POST',
-    body: ({
-      email,
-      password
-    })
+    body: toRaw(loginCredentials)
   });
 };
 </script>

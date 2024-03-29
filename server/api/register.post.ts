@@ -1,5 +1,5 @@
 export default defineEventHandler(async (event) => {
-  const body = await readBody(event);
+  const { email, password } = await readBody(event);
 
   console.log(body);
 
