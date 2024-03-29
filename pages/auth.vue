@@ -50,6 +50,7 @@
                     density="compact"
                     clearable
                     variant="outlined"
+                    :rules="[rules.required, rules.email]"
                     v-model="loginCredentials.email"
                   ></VTextField>
                 </VCol>
@@ -63,6 +64,7 @@
                     density="compact"
                     clearable
                     variant="outlined"
+                    :rules="[rules.required]"
                     v-model="loginCredentials.password"
                   ></VTextField>
                 </VCol>
@@ -187,9 +189,29 @@ const loginCredentials = ref({
   password: ''
 });
 
-const onSubmitLogin = () => {
+const rules = {
+  required(value: string) {
+    return !!value || 'Required';
+  },
+  counter(value: string) {
+    return value.length <= 20 || 'Max 20 characters';
+  },
+  email(value: string) {
+    const pattern =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return pattern.test(value) || 'Invalid e-mail';
+  }
+};
+
+const onSubmitLogin = async () => {
   const { email, password } = loginCredentials.value;
-  console.log(email, password);
+  const { data } = await useFetch('/api/register', {
+    method: 'POST',
+    body: ({
+      email,
+      password
+    })
+  });
 };
 </script>
 
