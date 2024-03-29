@@ -13,10 +13,17 @@
       </VCol>
       <VCol>
         <VRow justify="end">
-          <p class="font-weight-bold mx-3">Sign up</p>
-          <VDivider vertical></VDivider>
-          <RouterLink to="/auth?type=login" class="font-weight-bold mx-3">Sign in</RouterLink>
-          <VDivider vertical></VDivider>
+          <p v-if="userStore.isAuthenticated" @click="userStore.logout" class="font-weight-bold mx-3 pointer">
+            Log out
+          </p>
+          <div v-else class="d-flex">
+            <p class="font-weight-bold mx-3">Sign up</p>
+          <VDivider vertical color="black"></VDivider>
+          <RouterLink to="/auth?type=login" class="font-weight-bold mx-3"
+            >Sign in</RouterLink
+          >
+          </div>
+          <VDivider vertical color="black"></VDivider>
           <p class="mx-3 d-flex align-center">
             <VIcon icon="mdi-help-circle-outline" size="20"></VIcon>
             Help
@@ -39,11 +46,20 @@
         <SearchInput />
       </VCol>
 
-      <VCol cols="12" md="2" class="d-flex justify-center justify-sm-end">
+      <VCol v-if="userStore.isAuthenticated" cols="12" md="2" class="d-flex justify-center justify-sm-end">
         <VMenu>
           <template #activator="{ props }">
-            <VBadge color="white" :content="cartStore.cart.length" class="w-100 cart-btn-contaioner">
-              <VBtn variant="outlined" v-bind="props" prepend-icon="mdi-cart" class="w-100">
+            <VBadge
+              color="white"
+              :content="cartStore.cart.length"
+              class="w-100 cart-btn-contaioner"
+            >
+              <VBtn
+                variant="outlined"
+                v-bind="props"
+                prepend-icon="mdi-cart"
+                class="w-100"
+              >
                 Cart
               </VBtn>
             </VBadge>
@@ -86,6 +102,7 @@
 
 <script setup lang="ts">
 const cartStore = useCartStore();
+const userStore = useUserStore();
 const router = useRouter();
 
 const onClickCheckout = () => {

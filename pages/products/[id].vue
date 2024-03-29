@@ -93,6 +93,7 @@ import { getDiscountedPrice } from '~/utils';
 
 const route = useRoute();
 const productStore = useProductStore();
+const userStore = useUserStore();
 const productId = Number(route.params.id);
 
 const selectedProduct = productStore.productList.find(
@@ -144,11 +145,21 @@ const snackbar = ref(false);
 const router = useRouter();
 
 const onClickAddToCart = () => {
+  if (!userStore.isAuthenticated) {
+    router.push('/auth?type=login');
+    return;
+  }
+
   cartStore.addToCart(selectedProduct);
   snackbar.value = true;
 };
 
 const onClickBuyNow = () => {
+  if (!userStore.isAuthenticated) {
+    router.push('/auth?type=login');
+    return;
+  }
+
   cartStore.addToCart(selectedProduct);
   router.push('/checkout');
 };

@@ -16,11 +16,17 @@ const useUserStore = defineStore('user', {
   getters: {
     user(): User | null {
       return this.userState;
+    },
+    isAuthenticated(): boolean {
+      return this.userState !== null;
     }
   },
   actions: {
     setUser(user: User) {
       this.userState = user;
+    },
+    logout() {
+      this.userState = null;
     }
   }
 });
