@@ -98,6 +98,7 @@
                     clearable
                     variant="outlined"
                     :rules="[rules.required]"
+                    v-model="registerCredentials.firstName"
                   ></VTextField
                 ></VCol>
                 <VCol cols="6" class="pb-0">
@@ -109,6 +110,7 @@
                     clearable
                     variant="outlined"
                     :rules="[rules.required]"
+                    v-model="registerCredentials.lastName"
                   >
                   </VTextField>
                 </VCol>
@@ -123,6 +125,7 @@
                     clearable
                     variant="outlined"
                     :rules="[rules.required, rules.email]"
+                    v-model="registerCredentials.email"
                   ></VTextField>
                 </VCol>
               </VRow>
@@ -138,6 +141,7 @@
                     clearable
                     variant="outlined"
                     :rules="[rules.required]"
+                    v-model="registerCredentials.password"
                   ></VTextField>
                 </VCol>
               </VRow>
@@ -222,7 +226,12 @@ const registerCredentials = ref({
   password: ''
 });
 
-const onSubmitRegister = async () => {};
+const onSubmitRegister = async () => {
+  const response = await useFetch('api/register', {
+    method: 'POST',
+    body: toRaw(registerCredentials.value)
+  });
+};
 </script>
 
 <style scoped>
