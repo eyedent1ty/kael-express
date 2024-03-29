@@ -40,6 +40,24 @@
             max-width="400"
           >
             <h2 class="text-h6 font-weight-regular mb-5">Log In</h2>
+            <VCard
+              v-if="loginCredentials.error"
+              class="mb-5 pa-2 d-flex align-center ga-2"
+              color="error"
+              flat
+              hover
+              variant="outlined"
+            >
+              <VIcon
+                icon="mdi-alert-circle-outline"
+                color="error"
+                size="large"
+              ></VIcon>
+              <p class="text-error text-body-2">
+                Login has failed; please try again later or use different login
+                method.
+              </p>
+            </VCard>
             <VForm @submit.prevent="onSubmitLogin">
               <VRow>
                 <VCol cols="12" class="pb-0">
@@ -194,7 +212,8 @@ const type = ref(route.query.type);
 // LOGIN
 const loginCredentials = ref({
   email: '',
-  password: ''
+  password: '',
+  error: null as unknown
 });
 
 const rules = {
@@ -212,10 +231,18 @@ const rules = {
 };
 
 const onSubmitLogin = async () => {
-  const response = await useFetch('/api/register', {
+  const { email, password } = loginCredentials.value;
+  const { data, error } = await useFetch('/api/login', {
     method: 'POST',
-    body: toRaw(loginCredentials)
+    body: {
+      email,
+      password
+    }
   });
+
+  if (error) {
+    loginCredentials.value.error = error;
+  }
 };
 
 // Register Auth
@@ -223,16 +250,26 @@ const registerCredentials = ref({
   firstName: '',
   lastName: '',
   email: '',
-  password: ''
+  password: '',
+  error: null as unknown
 });
 
 const onSubmitRegister = async () => {
-  const response = await useFetch('api/register', {
+  const { firstName, lastName, email, password } = registerCredentials.value;
+
+  const { data, error } = await useFetch('api/register', {
     method: 'POST',
-    body: toRaw(registerCredentials.value)
+    body: {
+      firstName,
+      lastName,
+      email,
+      password
+    }
   });
 
-  console.log(response);
+  if (error) {
+    registerCredentials.value.error = error;
+  }
 };
 </script>
 
