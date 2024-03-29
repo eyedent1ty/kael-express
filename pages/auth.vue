@@ -218,6 +218,8 @@ definePageMeta({
   layout: 'auth'
 });
 
+const router = useRouter();
+
 const TYPE_CONSTANTS = {
   LOGIN_AUTH: 'login',
   REGISTER_AUTH: 'register'
@@ -258,8 +260,10 @@ const onSubmitLogin = async () => {
     }
   });
 
-  if (error) {
+  if (error.value) {
     loginCredentials.value.error = error;
+  } else {
+    router.push('/products');
   }
 };
 
@@ -285,7 +289,7 @@ const onSubmitRegister = async () => {
     }
   });
 
-  if (error) {
+  if (error.value) {
     registerCredentials.value.error = error;
   }
 };
