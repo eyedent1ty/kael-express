@@ -40,7 +40,7 @@
             max-width="400"
           >
             <h2 class="text-h6 font-weight-regular mb-5">Log In</h2>
-            <VForm>
+            <VForm @submit.prevent="onSubmitLogin">
               <VRow>
                 <VCol cols="12" class="pb-0">
                   <VTextField
@@ -48,6 +48,9 @@
                     label="Email Address"
                     placeholder="johndoe@gmail.com"
                     density="compact"
+                    clearable
+                    variant="outlined"
+                    v-model="loginCredentials.email"
                   ></VTextField>
                 </VCol>
               </VRow>
@@ -58,6 +61,9 @@
                     label="Password"
                     placeholder="*************"
                     density="compact"
+                    clearable
+                    variant="outlined"
+                    v-model="loginCredentials.password"
                   ></VTextField>
                 </VCol>
               </VRow>
@@ -87,6 +93,8 @@
                     label="First Name"
                     placeholder="John"
                     density="compact"
+                    clearable
+                    variant="outlined"
                   ></VTextField
                 ></VCol>
                 <VCol cols="6" class="pb-0">
@@ -95,6 +103,8 @@
                     label="Last Name"
                     placeholder="Doe"
                     density="compact"
+                    clearable
+                    variant="outlined"
                   >
                   </VTextField>
                 </VCol>
@@ -106,6 +116,8 @@
                     label="Email Address"
                     placeholder="johndoe@gmail.com"
                     density="compact"
+                    clearable
+                    variant="outlined"
                   ></VTextField>
                 </VCol>
               </VRow>
@@ -118,6 +130,8 @@
                     placeholder="*************"
                     density="compact"
                     class="mb-5"
+                    clearable
+                    variant="outlined"
                   ></VTextField>
                 </VCol>
               </VRow>
@@ -166,6 +180,17 @@ const TYPE_CONSTANTS = {
 const route = useRoute();
 
 const type = ref(route.query.type);
+
+// LOGIN
+const loginCredentials = ref({
+  email: '',
+  password: ''
+});
+
+const onSubmitLogin = () => {
+  const { email, password } = loginCredentials.value;
+  console.log(email, password);
+};
 </script>
 
 <style scoped>
