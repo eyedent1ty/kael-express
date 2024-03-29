@@ -19,7 +19,7 @@
         </VCol>
       </VRow>
     </header>
-    <main class="bg-primary pa-md-16 h-80 d-flex align-center">
+    <main class="bg-primary pa-md-16 h-80 d-flex align-center px-2 px-md-0">
       <VRow>
         <VCol cols="12" md="6" class="text-center">
           <div class="mb-16">
@@ -27,11 +27,13 @@
             <h1 class="text-h4 text-sm-h2 font-weight-regular">Kael Express</h1>
           </div>
 
-          <p class="text-h7 text-sm-h5">
-            The leading online shopping platform in Southeast Asia and Taiwan
+          <p class="text-h8 text-sm-h6 font-weight-regular">
+            a cutting-edge e-commerce platform that harnesses the power of the
+            internet to provide users with an effortless online buying
+            experience.
           </p>
         </VCol>
-        <VCol cols="12" md="6" align-self="center">
+        <VCol cols="12" md="6" align-self="center" class="mb-10 mb-md-0">
           <VCard
             v-if="type === TYPE_CONSTANTS.LOGIN_AUTH"
             class="pa-5 mx-auto"
