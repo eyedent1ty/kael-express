@@ -17,7 +17,9 @@
             Log out
           </p>
           <div v-else class="d-flex">
-            <p class="font-weight-bold mx-3">Sign up</p>
+            <RouterLink to="/auth?type=register" class="font-weight-bold mx-3"
+            >Sign up</RouterLink
+          >
           <VDivider vertical color="black"></VDivider>
           <RouterLink to="/auth?type=login" class="font-weight-bold mx-3"
             >Sign in</RouterLink
