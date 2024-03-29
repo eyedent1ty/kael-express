@@ -231,6 +231,8 @@ const onSubmitRegister = async () => {
     method: 'POST',
     body: toRaw(registerCredentials.value)
   });
+
+  console.log(response);
 };
 </script>
 

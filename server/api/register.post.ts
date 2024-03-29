@@ -1,11 +1,30 @@
+import prisma from '../prisma';
+
 export default defineEventHandler(async (event) => {
   const { firstName, lastName, email, password } = await readBody(event);
 
-  console.log({ firstName, lastName, email, password });
-
   if (!firstName || !lastName || !email || !password) {
-    return {
-      message: 'Invalid data'
-    }
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'Invalid inputs'
+    })
+  }
+
+  try {
+    const createdUser = await prisma.user.create({
+      data: {
+        firstName,
+        lastName,
+        email,
+        password
+      }
+    });
+    prisma.$disconnect();
+  } catch (e) {
+    prisma.$disconnect();
+    throw createError({
+      statusCode: 400,
+      statusMessage: 'Email already exists'
+    });
   }
 });
