@@ -87,7 +87,7 @@
 
           <VCard v-else class="pa-5 mx-auto" max-width="400">
             <h2 class="text-h6 font-weight-regular mb-5">Sign Up</h2>
-            <VForm>
+            <VForm @submit.prevent="onSubmitRegister">
               <VRow>
                 <VCol cols="6" class="pb-0"
                   ><VTextField
@@ -97,6 +97,7 @@
                     density="compact"
                     clearable
                     variant="outlined"
+                    :rules="[rules.required]"
                   ></VTextField
                 ></VCol>
                 <VCol cols="6" class="pb-0">
@@ -107,6 +108,7 @@
                     density="compact"
                     clearable
                     variant="outlined"
+                    :rules="[rules.required]"
                   >
                   </VTextField>
                 </VCol>
@@ -120,6 +122,7 @@
                     density="compact"
                     clearable
                     variant="outlined"
+                    :rules="[rules.required, rules.email]"
                   ></VTextField>
                 </VCol>
               </VRow>
@@ -134,6 +137,7 @@
                     class="mb-5"
                     clearable
                     variant="outlined"
+                    :rules="[rules.required]"
                   ></VTextField>
                 </VCol>
               </VRow>
@@ -209,6 +213,16 @@ const onSubmitLogin = async () => {
     body: toRaw(loginCredentials)
   });
 };
+
+// Register Auth
+const registerCredentials = ref({
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: ''
+});
+
+const onSubmitRegister = async () => {};
 </script>
 
 <style scoped>
