@@ -226,6 +226,7 @@ const TYPE_CONSTANTS = {
 };
 
 const route = useRoute();
+const userStore = useUserStore();
 
 const type = ref(route.query.type);
 
@@ -263,6 +264,7 @@ const onSubmitLogin = async () => {
   if (error.value) {
     loginCredentials.value.error = error;
   } else {
+    console.log(data);
     router.push('/products');
   }
 };

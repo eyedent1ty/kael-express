@@ -18,6 +18,13 @@ export default defineEventHandler(async (event) => {
       }
     });
     prisma.$disconnect();
+
+    return {
+      id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email
+    };
   } catch (e) {
     prisma.$disconnect();
     throw createError({
