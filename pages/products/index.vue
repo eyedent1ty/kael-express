@@ -14,6 +14,7 @@
 import ProductList from '~/components/ProductList.vue';
 
 const productStore = useProductStore();
+const userStore = useUserStore();
 const route = useRoute();
 
 let category: Readonly<string>;

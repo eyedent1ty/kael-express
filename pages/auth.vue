@@ -267,6 +267,11 @@ const onSubmitLogin = async () => {
 
     if (data.value !== null) {
       userStore.setUser(toRaw(data.value));
+      localStorage.setItem('id', String(data.value.id));
+      localStorage.setItem('firstName', String(data.value.firstName));
+      localStorage.setItem('lastName', String(data.value.lastName));
+      localStorage.setItem('email', String(data.value.email));
+
     }
 
     router.push('/products');
