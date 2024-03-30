@@ -19,7 +19,7 @@
         <VRow justify="end">
           <p
             v-if="userStore.isAuthenticated"
-            @click="userStore.logout"
+            @click="onClickLogout"
             class="font-weight-bold mx-3 pointer"
           >
             Log out
@@ -116,6 +116,15 @@
 const cartStore = useCartStore();
 const userStore = useUserStore();
 const router = useRouter();
+const route = useRoute();
+
+const onClickLogout = () => {
+  userStore.logout();
+
+  if (route.path === '/checkout') {
+    router.push('/products');
+  }
+}
 
 const onClickCheckout = () => {
   router.push('/checkout');
