@@ -161,12 +161,7 @@ const addToCartConstants = {
 
 const addToCartAction = ref('');
 
-const onClickAddToCart = async () => {
-  if (!userStore.isAuthenticated) {
-    router.push('/auth?type=login');
-    return;
-  }
-
+const addToCart = async () => {
   if (userStore.user !== null) {
     if (cartStore.isProductAlreadyExists(selectedProduct)) {
       addToCartAction.value = addToCartConstants.ALREADY_EXISTS;
@@ -197,13 +192,22 @@ const onClickAddToCart = async () => {
   }
 };
 
-const onClickBuyNow = () => {
+const onClickAddToCart = async () => {
   if (!userStore.isAuthenticated) {
     router.push('/auth?type=login');
     return;
   }
 
+  await addToCart();
+};
 
+const onClickBuyNow = async () => {
+  if (!userStore.isAuthenticated) {
+    router.push('/auth?type=login');
+    return;
+  }
+
+  await addToCart();
   // cartStore.addToCart(selectedProduct);
   router.push('/checkout');
 };
