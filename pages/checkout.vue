@@ -25,7 +25,7 @@
               </RouterLink>
             </td>
             <td>
-              <span class="original-price"> ${{ item.price.toFixed(2) }} </span>
+              <span class="original-price"> ${{ item.price }} </span>
               <span class="discounted-price">
                 ${{
                   getDiscountedPrice(
