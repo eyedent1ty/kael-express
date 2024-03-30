@@ -125,11 +125,18 @@ import { getDiscountedPrice } from '~/utils';
 const cartStore = useCartStore();
 const snackbar = ref(false);
 
-const onClickDeleteCartItem = (itemId: number): void => {
+const onClickDeleteCartItem = async (itemId: number) => {
 
-  
+  const { data } = await useFetch<CartItem>('api/cart', {
+    method: 'DELETE',
+    body: {
+      id: itemId
+    }
+  });
 
-  cartStore.removeFromCart(itemId);
+  if (data.value !== null) {
+    cartStore.removeFromCart(data.value.id);
+  }
 };
 
 const onClickDecrementQuantity = (item: CartItem) => {

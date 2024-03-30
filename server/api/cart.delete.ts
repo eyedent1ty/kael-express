@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
   try {
     const deletedCartItem = prisma.cartItem.delete({
       where: {
-        id: Number(body.id)
+        id: body.id
       }
     });
 
