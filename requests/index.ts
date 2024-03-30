@@ -18,32 +18,27 @@ const httpRegisterUser = async (
   email: string,
   password: string
 ) => {
-  if (!firstName || !lastName || !email || !password) {
-    return;
-  }
-
-  const { data: registeredUser, error } = await useFetch(ROUTES.REGISTER, {
-    method: 'POST',
-    body: {
-      firstName,
-      lastName,
-      email,
-      password
+  const { data: registeredUser, error } = await useFetch<User>(
+    ROUTES.REGISTER,
+    {
+      method: 'POST',
+      body: {
+        firstName,
+        lastName,
+        email,
+        password
+      }
     }
-  });
+  );
 
-  return error.value ? error : registeredUser.value;
+  return {
+    registeredUser: toRaw(registeredUser.value),
+    error: error.value
+  };
 };
 
 // /login route
-const httpLoginUser = async (
-  email: string,
-  password: string
-): Promise<FetchError | User> => {
-  if (!email || !password) {
-    return Error('Invalid email or password');
-  }
-
+const httpLoginUser = async (email: string, password: string) => {
   const { data: loggedInUser, error } = await useFetch<User>(ROUTES.LOGIN, {
     method: 'POST',
     body: {
@@ -52,17 +47,10 @@ const httpLoginUser = async (
     }
   });
 
-  if (error.value || loggedInUser.value === null) {
-    return error.value!;
-  }
-
-  userStore.setUser(toRaw(loggedInUser.value));
-  localStorage.setItem('id', String(loggedInUser.value.id));
-  localStorage.setItem('firstName', loggedInUser.value.firstName);
-  localStorage.setItem('lastName', loggedInUser.value.lastName);
-  localStorage.setItem('email', loggedInUser.value.email);
-
-  return loggedInUser.value;
+  return {
+    loggedInUser: toRaw(loggedInUser.value),
+    error: error.value
+  };
 };
 
 export { httpRegisterUser, httpLoginUser };

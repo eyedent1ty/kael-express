@@ -214,8 +214,10 @@
 </template>
 
 <script setup lang="ts">
+import { httpLoginUser, httpRegisterUser } from '../requests/index';
+
 definePageMeta({
-  layout: 'auth',
+  layout: 'auth'
 });
 
 const router = useRouter();
@@ -251,31 +253,22 @@ const rules = {
   }
 };
 
+// Login Auth
 const onSubmitLogin = async () => {
   const { email, password } = loginCredentials.value;
-  const { data, error } = await useFetch('/api/login', {
-    method: 'POST',
-    body: {
-      email,
-      password
-    }
-  });
+  const { loggedInUser, error } = await httpLoginUser(email, password);
 
-  if (error.value) {
+  if (error || loggedInUser === null) {
     loginCredentials.value.error = error;
-  } else {
-
-    if (data.value !== null) {
-      userStore.setUser(toRaw(data.value));
-      localStorage.setItem('id', String(data.value.id));
-      localStorage.setItem('firstName', String(data.value.firstName));
-      localStorage.setItem('lastName', String(data.value.lastName));
-      localStorage.setItem('email', String(data.value.email));
-
-    }
-
-    router.push('/products');
+    return;
   }
+
+  userStore.setUser(toRaw(loggedInUser));
+  localStorage.setItem('id', String(loggedInUser.id));
+  localStorage.setItem('firstName', loggedInUser.firstName);
+  localStorage.setItem('lastName', loggedInUser.lastName);
+  localStorage.setItem('email', loggedInUser.email);
+  router.push('/products');
 };
 
 // Register Auth
@@ -289,18 +282,9 @@ const registerCredentials = ref({
 
 const onSubmitRegister = async () => {
   const { firstName, lastName, email, password } = registerCredentials.value;
+  const { registeredUser, error } = await httpRegisterUser(firstName, lastName, email, password);
 
-  const { data, error } = await useFetch('api/register', {
-    method: 'POST',
-    body: {
-      firstName,
-      lastName,
-      email,
-      password
-    }
-  });
-
-  if (error.value) {
+  if (error || registeredUser === null) {
     registerCredentials.value.error = error;
   }
 };
