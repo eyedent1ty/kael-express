@@ -6,24 +6,32 @@
           <RouterLink to="/" class="mx-3">Home</RouterLink>
           <VDivider vertical></VDivider>
           <p class="ml-3 d-flex ga-2">
-            <VIcon icon="mdi-facebook"></VIcon>
-            <VIcon icon="mdi-instagram"></VIcon>
+            <RouterLink to="#">
+              <VIcon icon="mdi-facebook"></VIcon>
+            </RouterLink>
+            <RouterLink to="#">
+              <VIcon icon="mdi-instagram"></VIcon>
+            </RouterLink>
           </p>
         </VRow>
       </VCol>
       <VCol>
         <VRow justify="end">
-          <p v-if="userStore.isAuthenticated" @click="userStore.logout" class="font-weight-bold mx-3 pointer">
+          <p
+            v-if="userStore.isAuthenticated"
+            @click="userStore.logout"
+            class="font-weight-bold mx-3 pointer"
+          >
             Log out
           </p>
           <div v-else class="d-flex">
             <RouterLink to="/auth?type=register" class="font-weight-bold mx-3"
-            >Sign up</RouterLink
-          >
-          <VDivider vertical color="black"></VDivider>
-          <RouterLink to="/auth?type=login" class="font-weight-bold mx-3"
-            >Sign in</RouterLink
-          >
+              >Sign up</RouterLink
+            >
+            <VDivider vertical color="black"></VDivider>
+            <RouterLink to="/auth?type=login" class="font-weight-bold mx-3"
+              >Sign in</RouterLink
+            >
           </div>
           <VDivider vertical color="black"></VDivider>
           <p class="mx-3 d-flex align-center">
@@ -48,7 +56,12 @@
         <SearchInput />
       </VCol>
 
-      <VCol v-if="userStore.isAuthenticated" cols="12" md="2" class="d-flex justify-center justify-sm-end">
+      <VCol
+        v-if="userStore.isAuthenticated"
+        cols="12"
+        md="2"
+        class="d-flex justify-center justify-sm-end"
+      >
         <VMenu>
           <template #activator="{ props }">
             <VBadge
