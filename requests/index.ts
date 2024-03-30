@@ -53,12 +53,13 @@ const httpLoginUser = async (email: string, password: string) => {
 };
 
 // /cart
-const httpUpdateCartItem = async (cartItem: CartItem) => {
+const httpUpdateCartItem = async (cartItem: CartItem, action: string) => {
   const { id } = cartItem;
   const { data: updatedCartItem, error } = await useFetch<CartItem>(ROUTES.CART, {
     method: 'PATCH',
     body: {
-      id
+      id,
+      action
     }
   });
 

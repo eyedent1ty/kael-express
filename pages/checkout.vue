@@ -46,20 +46,20 @@
                 type="number"
                 density="compact"
                 class="pa-0 mx-auto"
-                v-model="item.quantity"
+                readonly
               >
                 <template v-slot:prepend>
                   <v-icon
                     color="red"
                     icon="mdi-minus"
-                    @click="onClickDecrementQuantity(item)"
+                    @click="onClickUpdateQuantity(item, ACTIONS.DECREMENT)"
                   ></v-icon>
                 </template>
                 <template v-slot:append>
                   <v-icon
                     color="green"
                     icon="mdi-plus"
-                    @click="onClickIncrementQuantity(item)"
+                    @click="onClickUpdateQuantity(item, ACTIONS.INCREMENT)"
                   ></v-icon>
                 </template>
               </v-text-field>
@@ -146,28 +146,33 @@ const onClickDeleteCartItem = async (itemId: number) => {
   }
 };
 
-const onClickDecrementQuantity = (item: CartItem) => {
-  if (item.quantity === 1) {
-    return;
-  }
-  item.quantity--;
+const ACTIONS = {
+  INCREMENT: 'INCREMENT',
+  DECREMENT: 'DECREMENT'
 };
 
-const onClickIncrementQuantity = async (item: CartItem) => {
-  console.log(item);
-  const { stock } = item;
+const onClickUpdateQuantity = async (
+  cartItem: CartItem,
+  action: string = 'INCREMENT'
+) => {
+  const { stock } = cartItem;
 
-  if (item.quantity === stock) {
+  if (
+    (action === ACTIONS.INCREMENT && cartItem.quantity === stock) ||
+    (action === ACTIONS.DECREMENT && cartItem.quantity === 1)
+  ) {
     return;
   }
 
-  const { updatedCartItem, error } = await httpUpdateCartItem(item);
+  action === ACTIONS.INCREMENT ? cartItem.quantity++ : cartItem.quantity--;
+
+  const { updatedCartItem, error } = await httpUpdateCartItem(cartItem, action);
 
   if (error || updatedCartItem === null) {
     return;
   }
 
-  item.quantity = updatedCartItem.quantity;
+  cartItem.quantity = updatedCartItem.quantity;
 };
 
 const onClickCheckout = () => {
