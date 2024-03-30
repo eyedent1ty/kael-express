@@ -1,4 +1,5 @@
 import type { User } from '../types/index';
+import { FetchError } from 'ofetch';
 
 // Available Routes
 const ROUTES = {
@@ -34,11 +35,13 @@ const httpRegisterUser = async (
   return error.value ? error : registeredUser.value;
 };
 
-
 // /login route
-const httpLoginUser = async (email: string, password: string) => {
+const httpLoginUser = async (
+  email: string,
+  password: string
+): Promise<FetchError | User> => {
   if (!email || !password) {
-    return;
+    return Error('Invalid email or password');
   }
 
   const { data: loggedInUser, error } = await useFetch<User>(ROUTES.LOGIN, {
@@ -50,7 +53,7 @@ const httpLoginUser = async (email: string, password: string) => {
   });
 
   if (error.value || loggedInUser.value === null) {
-    return error;
+    return error.value!;
   }
 
   userStore.setUser(toRaw(loggedInUser.value));
