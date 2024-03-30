@@ -67,12 +67,12 @@
             </VBadge>
           </template>
 
-          <VCard min-width="300" min-height="300" class="relative">
+          <VCard min-width="300" min-height="300" class="relative pb-10">
             <p class="empty-cart-message" v-if="cartStore.cart.length === 0">
               No Products Yet :)
             </p>
 
-            <VList v-else>
+            <VList class="list-cart-items" v-else>
               <VListItem
                 v-for="cartItem in cartStore.cart"
                 :prepend-avatar="cartItem.thumbnail"
@@ -90,11 +90,6 @@
               class="w-100 absolute bottom-0"
               >Go to Checkout</Button
             >
-
-            <!-- ADD PRODUCTS HERE -->
-            <!-- <VList>
-            <VListItem></VListItem>
-          </VList> -->
           </VCard>
         </VMenu>
       </VCol>
@@ -148,5 +143,10 @@ a:visited {
 
 .v-badge :deep(.v-badge__badge) {
   color: var(--primary-color) !important;
+}
+
+.list-cart-items {
+  overflow-y: scroll;
+  max-height: 500px;
 }
 </style>
