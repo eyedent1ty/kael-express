@@ -11,7 +11,8 @@ CREATE TABLE "User" (
 
 -- CreateTable
 CREATE TABLE "CartItem" (
-    "id" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
+    "productId" INTEGER NOT NULL,
     "brand" TEXT NOT NULL,
     "category" TEXT NOT NULL,
     "description" TEXT NOT NULL,

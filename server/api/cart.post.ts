@@ -39,7 +39,7 @@ export default defineEventHandler(async (event) => {
   try {
     const createdCartItem = await prisma.cartItem.create({
       data: {
-        id,
+        productId: id,
         brand,
         category,
         description,
@@ -63,6 +63,7 @@ export default defineEventHandler(async (event) => {
     return createdCartItem;
 
   } catch (e) {
+    console.log(e);
     prisma.$disconnect();
     throw createError({
       statusCode: 400,

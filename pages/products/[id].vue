@@ -70,10 +70,14 @@
           <v-snackbar class="snackbar" v-model="snackbar" color="#ee4d2d">
             <div class="d-flex align-center ga-3">
               <VIcon icon="mdi-check" size="x-large"></VIcon>
-            <p v-if="addToCartAction === addToCartConstants.ADD">Item has been added to your shopping cart</p>
-            <p v-else-if="addToCartAction === addToCartConstants.UPDATE">Item already exists on your cart; Added 1 quantity instead</p>
+              <p v-if="addToCartAction === addToCartConstants.ADD">
+                Item has been added to your shopping cart
+              </p>
+              <p v-else-if="addToCartAction === addToCartConstants.ALREADY_EXISTS">
+                Item already exists on your cart
+              </p>
             </div>
-          
+
             <template v-slot:actions>
               <v-btn color="white" variant="text" @click="snackbar = false">
                 x
@@ -148,20 +152,8 @@ const cartStore = useCartStore();
 const snackbar = ref(false);
 const router = useRouter();
 
-const updateCartItem = async (id: number, userId: number) => {
-  const { data } = await useFetch('/api/cart', {
-    method: 'PATCH',
-    body: {
-      id,
-      userId
-    }
-  });
-
-  return data.value;
-};
-
 const addToCartConstants = {
-  UPDATE: 'update',
+  ALREADY_EXISTS: 'already_exists',
   ADD: 'add'
 };
 
@@ -175,18 +167,8 @@ const onClickAddToCart = async () => {
 
   if (userStore.user !== null) {
     if (cartStore.isProductAlreadyExists(selectedProduct)) {
-      // UPDATE QUANTITY
-
-      const updatedCartItem = await updateCartItem(
-        selectedProduct.id,
-        userStore.user.id
-      );
-
-      if (updatedCartItem !== null) {
-        addToCartAction.value = addToCartConstants.UPDATE;
-        cartStore.setQuantity(updatedCartItem.id, updatedCartItem.quantity);
-        snackbar.value = true;
-      }
+      addToCartAction.value = addToCartConstants.ALREADY_EXISTS;
+      snackbar.value = true;
       return;
     }
 
