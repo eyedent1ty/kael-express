@@ -47,6 +47,7 @@
                 density="compact"
                 class="pa-0 mx-auto"
                 readonly
+                v-model="item.quantity"
               >
                 <template v-slot:prepend>
                   <v-icon

@@ -53,6 +53,16 @@ const httpLoginUser = async (email: string, password: string) => {
 };
 
 // /cart
+const httpPostCartItem = async (cartItem: CartItem) => {
+  const { data } = await useFetch('/api/cart', {
+    method: 'POST',
+    body: {
+      ...cartItem
+    }
+  });
+
+}
+
 const httpUpdateCartItem = async (cartItem: CartItem, action: string) => {
   const { id } = cartItem;
   const { data: updatedCartItem, error } = await useFetch<CartItem>(ROUTES.CART, {

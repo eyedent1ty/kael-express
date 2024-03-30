@@ -97,6 +97,7 @@
 </template>
 
 <script setup lang="ts">
+import type { CartItem } from '~/types';
 import { getDiscountedPrice } from '~/utils';
 
 const route = useRoute();
@@ -172,6 +173,13 @@ const onClickAddToCart = async () => {
       return;
     }
 
+    // const cartItem = {
+    //   userId: userStore.user.id,
+    //   productId: selectedProduct.id,
+    //   quantity: selectedQuantity.value,
+    //   ...selectedProduct,
+    // }
+
     const { data } = await useFetch('/api/cart', {
       method: 'POST',
       body: {
@@ -201,6 +209,7 @@ const onClickBuyNow = () => {
     router.push('/auth?type=login');
     return;
   }
+
 
   // cartStore.addToCart(selectedProduct);
   router.push('/checkout');
