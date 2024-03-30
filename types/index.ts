@@ -21,6 +21,7 @@ interface FetchProducts {
 
 interface CartItem extends Product {
   quantity: number;
+  customerId: number;
 }
 
 export type { Product, FetchProducts, CartItem };

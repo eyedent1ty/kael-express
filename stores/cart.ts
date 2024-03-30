@@ -29,13 +29,19 @@ const useCartStore = defineStore('cart', {
     }
   },
   actions: {
-    addToCart(product: Product) {
-      if (!this.isProductAlreadyExists(product)) {
-        this.cartState.push({ ...product, quantity: 1 });
-      } else {
-        const selectedCartItem = this.getCartItemById(product.id)!;
-        selectedCartItem.quantity++;
+    async fetchCartItems() {
+      const userStore = useUserStore();
+      if (userStore.user !== null) {
+        const response = await fetch(`/api/cart?userId=${userStore.user.id}`);
+        const data = await response.json();
+        this.setCart(data);
       }
+    },
+    setCart(cart: CartItem[]) {
+      this.cartState = cart;
+    },
+    addToCart(cartItem: CartItem) {
+      this.cartState.push(cartItem);
     },
     removeFromCart(itemId: number): void {
       const idx = this.cartState.findIndex(

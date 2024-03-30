@@ -144,14 +144,33 @@ const cartStore = useCartStore();
 const snackbar = ref(false);
 const router = useRouter();
 
-const onClickAddToCart = () => {
+const onClickAddToCart = async () => {
   if (!userStore.isAuthenticated) {
     router.push('/auth?type=login');
     return;
   }
 
-  cartStore.addToCart(selectedProduct);
-  snackbar.value = true;
+  if (userStore.user !== null) {
+    const { data } = await useFetch('/api/cart', {
+      method: 'POST',
+      body: {
+        userId: userStore.user.id,
+        ...selectedProduct,
+        quantity: 1
+      }
+    });
+
+    if (data.value !== null) {
+      const cartItem = {
+        ...toRaw(data.value),
+        discountPercentage: Number(data.value.discountPercentage),
+        price: Number(data.value.price),
+        rating: Number(data.value.rating)
+      };
+      cartStore.addToCart(cartItem);
+      snackbar.value = true;
+    }
+  }
 };
 
 const onClickBuyNow = () => {
@@ -160,7 +179,7 @@ const onClickBuyNow = () => {
     return;
   }
 
-  cartStore.addToCart(selectedProduct);
+  // cartStore.addToCart(selectedProduct);
   router.push('/checkout');
 };
 </script>
