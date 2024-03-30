@@ -4,7 +4,8 @@ import type { Product, FetchProducts } from '~/types';
 const useProductStore = defineStore('products', {
   state() {
     return {
-      products: [] as Product[]
+      products: [] as Product[],
+      pending: true
     };
   },
   getters: {
@@ -14,9 +15,11 @@ const useProductStore = defineStore('products', {
   },
   actions: {
     async fetchProducts() {
-      const { data } = await useFetch<FetchProducts>(
+      const { data, pending } = await useFetch<FetchProducts>(
         'https://dummyjson.com/products/?limit=100'
       );
+
+      this.pending = false;
 
       if (data.value !== undefined && data.value !== null) {
         this.setProducts(data.value.products);

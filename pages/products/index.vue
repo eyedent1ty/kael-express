@@ -8,6 +8,10 @@
 
   <VDivider></VDivider>
   <ProductList :products="products" />
+  <div class="d-flex flex-column align-center" v-if="productStore.pending">
+    <v-progress-circular color="primary" indeterminate></v-progress-circular>
+    <p>Pending..</p>
+  </div>
 </template>
 
 <script setup lang="ts">
