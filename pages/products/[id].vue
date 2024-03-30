@@ -195,7 +195,7 @@ const onClickAddToCart = async () => {
       body: {
         userId: userStore.user.id,
         ...selectedProduct,
-        quantity: 1
+        quantity: selectedQuantity.value
       }
     });
 

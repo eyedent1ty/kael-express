@@ -24,4 +24,11 @@ interface CartItem extends Product {
   customerId: number;
 }
 
-export type { Product, FetchProducts, CartItem };
+interface User {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+}
+
+export type { Product, FetchProducts, CartItem, User };
