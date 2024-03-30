@@ -25,6 +25,10 @@ export default defineNuxtRouteMiddleware((to, from) => {
     return navigateTo('/products');
   }
 
+  if (to.path === '/success' && !userStore.isAuthenticated) {
+    return navigateTo('/auth?type=login');
+  }
+
   if (to.path === '/checkout') {
     if (!userStore.isAuthenticated) {
       return navigateTo('auth?type=login');

@@ -81,15 +81,17 @@
           </tr>
         </tbody>
         <template #bottom>
-          <div class="d-flex align-center  flex-column flex-sm-row justify-sm-space-between">
+          <div
+            class="d-flex align-center flex-column flex-sm-row justify-sm-space-between"
+          >
             <div class="d-flex align-center ga-2">
               <p>
-              Total ({{ cartStore.getLength }}
-              {{ cartStore.getLength > 1 ? 'items' : 'item' }}):
-            </p>
-            <p class="checkout__footer__total-price">
-              ${{ cartStore.totalPrice.toFixed(2) }}
-            </p>
+                Total ({{ cartStore.getLength }}
+                {{ cartStore.getLength > 1 ? 'items' : 'item' }}):
+              </p>
+              <p class="checkout__footer__total-price">
+                ${{ cartStore.totalPrice.toFixed(2) }}
+              </p>
             </div>
 
             <Button width="200px" size="large" @click="onClickCheckout"
@@ -107,7 +109,7 @@
       close-delay="5000"
     >
       <VIcon icon="mdi-check" size="x-large"></VIcon>
-      Item has been added to your shopping cart
+      Payment Successful
 
       <template v-slot:actions>
         <v-btn color="white" variant="text" @click="snackbar = false">
@@ -125,6 +127,7 @@ import { httpUpdateCartItem } from '../requests/index';
 
 const cartStore = useCartStore();
 const userStore = useUserStore();
+const router = useRouter();
 const snackbar = ref(false);
 
 useHead({
@@ -179,21 +182,20 @@ const onClickUpdateQuantity = async (
   cartItem.quantity = updatedCartItem.quantity;
 };
 
-const onClickCheckout = () => {
+const onClickCheckout = async () => {
   snackbar.value = true;
 
-  setTimeout(async () => {
-    if (userStore.user !== null) {
-      await useFetch('/api/cart', {
-        method: 'DELETE',
-        body: {
-          customerId: userStore.user.id
-        }
-      });
+  if (userStore.user !== null) {
+    await useFetch('/api/cart', {
+      method: 'DELETE',
+      body: {
+        customerId: userStore.user.id
+      }
+    });
 
-      cartStore.emptyCart();
-    }
-  }, 4000);
+    cartStore.emptyCart();
+    router.push('/success');
+  }
 };
 </script>
 
