@@ -4,14 +4,25 @@ export default defineEventHandler(async (event) => {
   const body = await readBody(event);
 
   try {
-    const deletedCartItem = prisma.cartItem.delete({
-      where: {
-        id: body.id
-      }
-    });
 
+    let data;
+
+    if (body.customerId !== undefined) {
+      data = prisma.cartItem.deleteMany({
+        where: {
+          customerId: body.customerId
+        }
+      })
+    } else {
+      data = prisma.cartItem.delete({
+        where: {
+          id: body.id
+        }
+      });
+    }
+    
     prisma.$disconnect();
-    return deletedCartItem;
+    return data;
   } catch (e) {
     prisma.$disconnect();
     throw createError({
