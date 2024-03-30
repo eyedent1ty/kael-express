@@ -1,6 +1,8 @@
 <template>
   <main class="checkout ma-sm-8 ma-md-16">
-    <h2 v-if="cartStore.isCartEmpty()" class="text-primary text-center">No Products Yet :)</h2>
+    <h2 v-if="cartStore.isCartEmpty()" class="text-primary text-center">
+      No Products Yet :)
+    </h2>
     <div v-else>
       <VTable>
         <thead>
@@ -17,11 +19,11 @@
             <td>
               <RouterLink :to="`/products/${item.id}`">
                 <VAvatar
-                :image="item.thumbnail"
-                size="x-large"
-                class="mr-10"
-              ></VAvatar>
-              {{ item.title }}
+                  :image="item.thumbnail"
+                  size="x-large"
+                  class="mr-10"
+                ></VAvatar>
+                {{ item.title }}
               </RouterLink>
             </td>
             <td>
@@ -90,7 +92,11 @@
                 ${{ cartStore.totalPrice.toFixed(2) }}
               </p>
             </VCol>
-            <VCol cols="12" sm="6" class="d-flex justify-sm-end py-0 mb-3 mb-sm-0">
+            <VCol
+              cols="12"
+              sm="6"
+              class="d-flex justify-sm-end py-0 mb-3 mb-sm-0"
+            >
               <Button width="200px" size="large" @click="onClickCheckout"
                 >Check Out</Button
               >
@@ -123,10 +129,10 @@ import type { CartItem } from '~/types';
 import { getDiscountedPrice } from '~/utils';
 
 const cartStore = useCartStore();
+const userStore = useUserStore();
 const snackbar = ref(false);
 
 const onClickDeleteCartItem = async (itemId: number) => {
-
   const { data } = await useFetch<CartItem>('api/cart', {
     method: 'DELETE',
     body: {
@@ -158,8 +164,17 @@ const onClickIncrementQuantity = (item: CartItem) => {
 const onClickCheckout = () => {
   snackbar.value = true;
 
-  setTimeout(() => {
-    cartStore.emptyCart();
+  setTimeout(async () => {
+    if (userStore.user !== null) {
+      await useFetch('/api/cart', {
+        method: 'DELETE',
+        body: {
+          customerId: userStore.user.id
+        }
+      });
+
+      cartStore.emptyCart();
+    }
   }, 4000);
 };
 </script>
