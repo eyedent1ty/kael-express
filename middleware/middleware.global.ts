@@ -1,6 +1,6 @@
 export default defineNuxtRouteMiddleware((to, from) => {
   const userStore = useUserStore();
-  
+
   if (process.client) {
     const id = Number(localStorage.getItem('id'));
     const firstName = localStorage.getItem('firstName');
@@ -25,7 +25,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
     return navigateTo('/products');
   }
 
-  if (to.name === 'checkout') {
+  if (to.path === '/checkout') {
     if (!userStore.isAuthenticated) {
       return navigateTo('auth?type=login');
     }

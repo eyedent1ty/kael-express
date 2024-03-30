@@ -8,6 +8,9 @@ export default defineNuxtConfig({
     },
     '/auth': {
       ssr: false
+    },
+    '/checkout': {
+      ssr: false
     }
   },
   build: {
