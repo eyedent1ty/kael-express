@@ -34,10 +34,12 @@
             >
           </div>
           <VDivider vertical color="black"></VDivider>
-          <p class="mx-3 d-flex align-center">
-            <VIcon icon="mdi-help-circle-outline" size="20"></VIcon>
-            Help
-          </p>
+          <RouterLink to="/help">
+            <p class="mx-3 d-flex align-center">
+              <VIcon icon="mdi-help-circle-outline" size="20"></VIcon>
+              Help
+            </p>
+          </RouterLink>
         </VRow>
       </VCol>
     </VRow>
