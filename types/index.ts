@@ -21,6 +21,7 @@ interface FetchProducts {
 
 interface CartItem extends Product {
   quantity: number;
+  productId: number;
   customerId: number;
 }
 

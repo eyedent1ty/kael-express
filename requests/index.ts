@@ -1,5 +1,4 @@
-import type { User } from '../types/index';
-import { FetchError } from 'ofetch';
+import type { CartItem, User } from '../types/index';
 
 // Available Routes
 const ROUTES = {
@@ -53,4 +52,20 @@ const httpLoginUser = async (email: string, password: string) => {
   };
 };
 
-export { httpRegisterUser, httpLoginUser };
+// /cart
+const httpUpdateCartItem = async (cartItem: CartItem) => {
+  const { id } = cartItem;
+  const { data: updatedCartItem, error } = await useFetch<CartItem>(ROUTES.CART, {
+    method: 'PATCH',
+    body: {
+      id
+    }
+  });
+
+  return {
+    updatedCartItem: updatedCartItem.value,
+    error: error.value
+  };
+};
+
+export { httpRegisterUser, httpLoginUser, httpUpdateCartItem };

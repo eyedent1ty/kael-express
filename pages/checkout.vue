@@ -127,6 +127,7 @@
 <script setup lang="ts">
 import type { CartItem } from '~/types';
 import { getDiscountedPrice } from '~/utils';
+import { httpUpdateCartItem } from '../requests/index';
 
 const cartStore = useCartStore();
 const userStore = useUserStore();
@@ -152,13 +153,21 @@ const onClickDecrementQuantity = (item: CartItem) => {
   item.quantity--;
 };
 
-const onClickIncrementQuantity = (item: CartItem) => {
+const onClickIncrementQuantity = async (item: CartItem) => {
+  console.log(item);
   const { stock } = item;
 
   if (item.quantity === stock) {
     return;
   }
-  item.quantity++;
+
+  const { updatedCartItem, error } = await httpUpdateCartItem(item);
+
+  if (error || updatedCartItem === null) {
+    return;
+  }
+
+  item.quantity = updatedCartItem.quantity;
 };
 
 const onClickCheckout = () => {
