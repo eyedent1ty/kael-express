@@ -220,6 +220,16 @@ definePageMeta({
   layout: 'auth'
 });
 
+useHead({
+  title: `Kael Express | Auth`,
+  meta: [
+    {
+      name: 'description',
+      content: 'Authentication page for kael express web application'
+    }
+  ]
+});
+
 const router = useRouter();
 
 const TYPE_CONSTANTS = {

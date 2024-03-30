@@ -73,7 +73,11 @@
               <p v-if="addToCartAction === addToCartConstants.ADD">
                 Item has been added to your shopping cart
               </p>
-              <p v-else-if="addToCartAction === addToCartConstants.ALREADY_EXISTS">
+              <p
+                v-else-if="
+                  addToCartAction === addToCartConstants.ALREADY_EXISTS
+                "
+              >
                 Item already exists on your cart
               </p>
             </div>
@@ -109,6 +113,16 @@ const productId = Number(route.params.id);
 const selectedProduct = productStore.productList.find(
   (product) => product.id === productId
 )!;
+
+useHead({
+  title: `Kael Express | ${selectedProduct.title}`,
+  meta: [
+    {
+      name: 'description',
+      content: selectedProduct.description
+    }
+  ]
+});
 
 const { title, description, rating, price, discountPercentage, images, stock } =
   selectedProduct;
@@ -173,8 +187,8 @@ const addToCart = async () => {
       customerId: userStore.user.id,
       productId: selectedProduct.id,
       quantity: selectedQuantity.value,
-      ...selectedProduct,
-    }
+      ...selectedProduct
+    };
 
     const { addedCartItem } = await httpPostCartItem(cartItem);
 

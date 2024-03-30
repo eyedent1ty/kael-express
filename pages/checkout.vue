@@ -127,6 +127,16 @@ const cartStore = useCartStore();
 const userStore = useUserStore();
 const snackbar = ref(false);
 
+useHead({
+  title: `Kael Express | Checkout`,
+  meta: [
+    {
+      name: 'description',
+      content: 'Lists all the cart items of the user'
+    }
+  ]
+});
+
 const onClickDeleteCartItem = async (itemId: number) => {
   const { data } = await useFetch<CartItem>('api/cart', {
     method: 'DELETE',

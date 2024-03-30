@@ -68,4 +68,14 @@
 definePageMeta({
   layout: 'help'
 })
+
+useHead({
+  title: `Kael Express | Help`,
+  meta: [
+    {
+      name: 'description',
+      content: 'A help page of Kael Express'
+    }
+  ]
+});
 </script>
