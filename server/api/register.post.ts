@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
     throw createError({
       statusCode: 400,
       statusMessage: 'Invalid inputs'
-    })
+    });
   }
 
   try {
@@ -20,6 +20,7 @@ export default defineEventHandler(async (event) => {
       }
     });
     prisma.$disconnect();
+    return createdUser;
   } catch (e) {
     prisma.$disconnect();
     throw createError({

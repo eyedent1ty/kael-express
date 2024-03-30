@@ -286,7 +286,15 @@ const onSubmitRegister = async () => {
 
   if (error || registeredUser === null) {
     registerCredentials.value.error = error;
+    return;
   }
+
+  userStore.setUser(toRaw(registeredUser));
+  localStorage.setItem('id', String(registeredUser.id));
+  localStorage.setItem('firstName', registeredUser.firstName);
+  localStorage.setItem('lastName', registeredUser.lastName);
+  localStorage.setItem('email', registeredUser.email);
+  router.push('/products');
 };
 </script>
 
