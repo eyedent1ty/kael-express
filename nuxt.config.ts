@@ -2,10 +2,14 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify';
 
 export default defineNuxtConfig({
   css: ['~/assets/css/globals.css'],
+  routeRules: {
+    '/products': {
+      ssr: false
+    }
+  },
   build: {
     transpile: ['vuetify']
   },
-  ssr: false,
   modules: [
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {
