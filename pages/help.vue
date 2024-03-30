@@ -2,7 +2,11 @@
   <main class="pa-10">
     <VRow>
       <VCol cols="12">
-        <h1 class="font-weight-regular text-center text-h5 text-sm-h4 text-primary">Welcome to Kael Express Help Center</h1>
+        <h1
+          class="font-weight-regular text-center text-h5 text-sm-h4 text-primary"
+        >
+          Welcome to Kael Express Help Center
+        </h1>
       </VCol>
       <VCol cols="12">
         <h2 class="font-weight-regular text-primary">About Kael Express</h2>
@@ -23,7 +27,9 @@
         </p>
       </VCol>
       <VCol cols="12">
-        <h2 class="font-weight-regular text-primary">Why Choose Kael Express?</h2>
+        <h2 class="font-weight-regular text-primary">
+          Why Choose Kael Express?
+        </h2>
         <VList>
           <VListItem class="text-justify text-sm-left">
             <strong>Built with Expertise:</strong> Kael Express is the
@@ -42,9 +48,9 @@
           <VListItem class="text-justify text-sm-left">
             <strong>Job-Ready Skills:</strong> By building Kael Express, I have
             gained invaluable hands-on experience in developing complex web
-            applications from scratch. My journey with Kael Express has
-            equipped us with job-ready skills, making myself well-prepared to take
-            on challenges in the dynamic world of web development.
+            applications from scratch. My journey with Kael Express has equipped
+            us with job-ready skills, making myself well-prepared to take on
+            challenges in the dynamic world of web development.
           </VListItem>
         </VList>
       </VCol>
@@ -52,13 +58,18 @@
         <h2 class="font-weight-regular text-primary">How Can We Help You?</h2>
         <p class="text-justify text-sm-left">
           Whether you have questions about our products, need assistance with
-          placing an order, or simply want to provide feedback, reach out to us directly for
-          personalized assistance.
+          placing an order, or simply want to provide feedback, reach out to us
+          directly for personalized assistance.
         </p>
         <p class="text-justify text-sm-left mt-10">
           Thank you for choosing Kael Express—we're excited to embark on this
           journey with you!
         </p>
+      </VCol>
+      <VCol cols="12" class="d-flex justify-center justify-sm-start">
+        <RouterLink to="/">
+          <VBtn  class="home" color="primary"> Home</VBtn>
+        </RouterLink>
       </VCol>
     </VRow>
   </main>
@@ -67,7 +78,7 @@
 <script setup lang="ts">
 definePageMeta({
   layout: 'help'
-})
+});
 
 useHead({
   title: `Kael Express | Help`,
@@ -79,3 +90,10 @@ useHead({
   ]
 });
 </script>
+
+<style scoped>
+.home {
+  min-width: 100px;
+  max-width: 200px;
+}
+</style>
