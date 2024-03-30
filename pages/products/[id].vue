@@ -68,8 +68,12 @@
           >
 
           <v-snackbar class="snackbar" v-model="snackbar" color="#ee4d2d">
-            <VIcon icon="mdi-check" size="x-large"></VIcon>
-            Item has been added to your shopping cart
+            <div class="d-flex align-center ga-3">
+              <VIcon icon="mdi-check" size="x-large"></VIcon>
+            <p v-if="addToCartAction === addToCartConstants.ADD">Item has been added to your shopping cart</p>
+            <p v-else-if="addToCartAction === addToCartConstants.UPDATE">Item already exists on your cart; Added 1 quantity instead</p>
+            </div>
+          
             <template v-slot:actions>
               <v-btn color="white" variant="text" @click="snackbar = false">
                 x
@@ -154,7 +158,14 @@ const updateCartItem = async (id: number, userId: number) => {
   });
 
   return data.value;
-}
+};
+
+const addToCartConstants = {
+  UPDATE: 'update',
+  ADD: 'add'
+};
+
+const addToCartAction = ref('');
 
 const onClickAddToCart = async () => {
   if (!userStore.isAuthenticated) {
@@ -163,18 +174,21 @@ const onClickAddToCart = async () => {
   }
 
   if (userStore.user !== null) {
-
     if (cartStore.isProductAlreadyExists(selectedProduct)) {
       // UPDATE QUANTITY
-      const updatedCartItem = await updateCartItem(selectedProduct.id, userStore.user.id);
+
+      const updatedCartItem = await updateCartItem(
+        selectedProduct.id,
+        userStore.user.id
+      );
 
       if (updatedCartItem !== null) {
+        addToCartAction.value = addToCartConstants.UPDATE;
         cartStore.setQuantity(updatedCartItem.id, updatedCartItem.quantity);
+        snackbar.value = true;
       }
-
       return;
     }
-
 
     const { data } = await useFetch('/api/cart', {
       method: 'POST',
@@ -192,6 +206,7 @@ const onClickAddToCart = async () => {
         price: Number(data.value.price),
         rating: Number(data.value.rating)
       };
+      addToCartAction.value = addToCartConstants.ADD;
       cartStore.addToCart(cartItem);
       snackbar.value = true;
     }
