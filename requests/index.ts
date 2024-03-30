@@ -7,10 +7,7 @@ const ROUTES = {
   CART: '/api/cart'
 };
 
-const userStore = useUserStore();
-
 // /register route
-
 const httpRegisterUser = async (
   firstName: string,
   lastName: string,
@@ -60,7 +57,7 @@ const httpPostCartItem = async (cartItem: CartItem) => {
       ...cartItem
     }
   });
-  
+
   return {
     addedCartItem: addedCartItem.value,
     error: error.value
