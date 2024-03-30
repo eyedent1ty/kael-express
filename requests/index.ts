@@ -54,24 +54,31 @@ const httpLoginUser = async (email: string, password: string) => {
 
 // /cart
 const httpPostCartItem = async (cartItem: CartItem) => {
-  const { data } = await useFetch('/api/cart', {
+  const { data: addedCartItem, error } = await useFetch<CartItem>('/api/cart', {
     method: 'POST',
     body: {
       ...cartItem
     }
   });
-
-}
+  
+  return {
+    addedCartItem: addedCartItem.value,
+    error: error.value
+  };
+};
 
 const httpUpdateCartItem = async (cartItem: CartItem, action: string) => {
   const { id } = cartItem;
-  const { data: updatedCartItem, error } = await useFetch<CartItem>(ROUTES.CART, {
-    method: 'PATCH',
-    body: {
-      id,
-      action
+  const { data: updatedCartItem, error } = await useFetch<CartItem>(
+    ROUTES.CART,
+    {
+      method: 'PATCH',
+      body: {
+        id,
+        action
+      }
     }
-  });
+  );
 
   return {
     updatedCartItem: updatedCartItem.value,
@@ -79,4 +86,9 @@ const httpUpdateCartItem = async (cartItem: CartItem, action: string) => {
   };
 };
 
-export { httpRegisterUser, httpLoginUser, httpUpdateCartItem };
+export {
+  httpRegisterUser,
+  httpLoginUser,
+  httpPostCartItem,
+  httpUpdateCartItem
+};

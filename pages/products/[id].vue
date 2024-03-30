@@ -99,6 +99,7 @@
 <script setup lang="ts">
 import type { CartItem } from '~/types';
 import { getDiscountedPrice } from '~/utils';
+import { httpPostCartItem } from '~/requests/index';
 
 const route = useRoute();
 const productStore = useProductStore();
@@ -180,20 +181,14 @@ const onClickAddToCart = async () => {
       ...selectedProduct,
     }
 
-    const { data } = await useFetch('/api/cart', {
-      method: 'POST',
-      body: {
-        ...cartItem
-      }
-    });
+    const { addedCartItem } = await httpPostCartItem(cartItem);
 
-    if (data.value !== null) {
+    if (addedCartItem !== null) {
       const cartItem = {
-        ...toRaw(data.value),
-        discountPercentage: Number(data.value.discountPercentage),
-        productId: data.value.id,
-        price: Number(data.value.price),
-        rating: Number(data.value.rating)
+        ...toRaw(addedCartItem),
+        discountPercentage: Number(addedCartItem.discountPercentage),
+        price: Number(addedCartItem.price),
+        rating: Number(addedCartItem.rating)
       };
       addToCartAction.value = addToCartConstants.ADD;
       cartStore.addToCart(cartItem);

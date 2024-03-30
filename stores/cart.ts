@@ -50,8 +50,7 @@ const useCartStore = defineStore('cart', {
       this.cartState.splice(idx, 1);
     },
     isProductAlreadyExists(product: Product) {
-      const idx = this.cart.findIndex((p) => p.id === product.id);
-
+      const idx = this.cart.findIndex((cartItem) => cartItem.productId === product.id);
       return idx >= 0 ? true : false;
     },
     setQuantity(id: number, quantity: number) {

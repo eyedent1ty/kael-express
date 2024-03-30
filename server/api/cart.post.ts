@@ -59,6 +59,8 @@ export default defineEventHandler(async (event) => {
       }
     });
 
+    console.log(createdCartItem);
+
     prisma.$disconnect();
     return createdCartItem;
 
