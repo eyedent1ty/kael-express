@@ -185,6 +185,7 @@ const onClickAddToCart = async () => {
       const cartItem = {
         ...toRaw(data.value),
         discountPercentage: Number(data.value.discountPercentage),
+        productId: data.value.id,
         price: Number(data.value.price),
         rating: Number(data.value.rating)
       };
