@@ -4,7 +4,7 @@
       No Products Yet :)
     </h2>
     <div v-else>
-      <VTable>
+      <VTable fixed-header>
         <thead>
           <tr>
             <th class="text-left">Product</th>
@@ -80,31 +80,24 @@
             </td>
           </tr>
         </tbody>
-      </VTable>
-      <VRow class="checkout__footer w-100">
-        <VCol cols="12">
-          <VRow align="center" justify="center" justify-md="end">
-            <VCol cols="12" sm="6" class="d-flex align-center ga-3 py-0">
+        <template #bottom>
+          <div class="d-flex align-center  flex-column flex-sm-row justify-sm-space-between">
+            <div class="d-flex align-center ga-2">
               <p>
-                Total ({{ cartStore.getLength }}
-                {{ cartStore.getLength > 1 ? 'items' : 'item' }}):
-              </p>
-              <p class="checkout__footer__total-price">
-                ${{ cartStore.totalPrice.toFixed(2) }}
-              </p>
-            </VCol>
-            <VCol
-              cols="12"
-              sm="6"
-              class="d-flex justify-sm-end py-0 mb-3 mb-sm-0"
+              Total ({{ cartStore.getLength }}
+              {{ cartStore.getLength > 1 ? 'items' : 'item' }}):
+            </p>
+            <p class="checkout__footer__total-price">
+              ${{ cartStore.totalPrice.toFixed(2) }}
+            </p>
+            </div>
+
+            <Button width="200px" size="large" @click="onClickCheckout"
+              >Check Out</Button
             >
-              <Button width="200px" size="large" @click="onClickCheckout"
-                >Check Out</Button
-              >
-            </VCol>
-          </VRow>
-        </VCol>
-      </VRow>
+          </div>
+        </template>
+      </VTable>
     </div>
     <v-snackbar
       class="snackbar"
@@ -215,12 +208,6 @@ const onClickCheckout = () => {
   text-align: center;
 }
 
-.checkout__footer {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
-
 .checkout__footer__total-price {
   color: var(--primary-color);
   font-size: 2rem;
@@ -234,5 +221,10 @@ const onClickCheckout = () => {
 
 .v-text-field :deep(.v-input__details) {
   display: none;
+}
+
+.v-table {
+  height: 500px;
+  max-height: 700px;
 }
 </style>
