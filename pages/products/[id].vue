@@ -144,6 +144,18 @@ const cartStore = useCartStore();
 const snackbar = ref(false);
 const router = useRouter();
 
+const updateCartItem = async (id: number, userId: number) => {
+  const { data } = await useFetch('/api/cart', {
+    method: 'PATCH',
+    body: {
+      id,
+      userId
+    }
+  });
+
+  return data.value;
+}
+
 const onClickAddToCart = async () => {
   if (!userStore.isAuthenticated) {
     router.push('/auth?type=login');
@@ -151,6 +163,19 @@ const onClickAddToCart = async () => {
   }
 
   if (userStore.user !== null) {
+
+    if (cartStore.isProductAlreadyExists(selectedProduct)) {
+      // UPDATE QUANTITY
+      const updatedCartItem = await updateCartItem(selectedProduct.id, userStore.user.id);
+
+      if (updatedCartItem !== null) {
+        cartStore.setQuantity(updatedCartItem.id, updatedCartItem.quantity);
+      }
+
+      return;
+    }
+
+
     const { data } = await useFetch('/api/cart', {
       method: 'POST',
       body: {

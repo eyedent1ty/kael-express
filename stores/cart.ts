@@ -54,6 +54,12 @@ const useCartStore = defineStore('cart', {
 
       return idx >= 0 ? true : false;
     },
+    setQuantity(id: number, quantity: number) {
+      const updatedProduct = this.cartState.find((cartItem) => cartItem.id === id);
+      if (updatedProduct !== undefined) {
+        updatedProduct.quantity = quantity;
+      }
+    },
     getCartItemById(id: number): CartItem | undefined {
       return this.cartState.find((cartItem) => cartItem.id === id);
     },
