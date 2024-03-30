@@ -173,19 +173,17 @@ const onClickAddToCart = async () => {
       return;
     }
 
-    // const cartItem = {
-    //   userId: userStore.user.id,
-    //   productId: selectedProduct.id,
-    //   quantity: selectedQuantity.value,
-    //   ...selectedProduct,
-    // }
+    const cartItem: CartItem = {
+      customerId: userStore.user.id,
+      productId: selectedProduct.id,
+      quantity: selectedQuantity.value,
+      ...selectedProduct,
+    }
 
     const { data } = await useFetch('/api/cart', {
       method: 'POST',
       body: {
-        userId: userStore.user.id,
-        ...selectedProduct,
-        quantity: selectedQuantity.value
+        ...cartItem
       }
     });
 

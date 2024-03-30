@@ -2,7 +2,7 @@ import prisma from '../prisma';
 
 export default defineEventHandler(async (event) => {
   const {
-    userId,
+    customerId,
     id,
     brand,
     category,
@@ -53,7 +53,7 @@ export default defineEventHandler(async (event) => {
         quantity,
         customer: {
           connect: {
-            id: userId
+            id: customerId
           }
         }
       }
