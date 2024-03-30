@@ -126,6 +126,9 @@ const cartStore = useCartStore();
 const snackbar = ref(false);
 
 const onClickDeleteCartItem = (itemId: number): void => {
+
+  
+
   cartStore.removeFromCart(itemId);
 };
 
